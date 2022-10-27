@@ -4,16 +4,39 @@
  */
 package com.mycompany.segundoproyecto.funciones;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
+import java.io.FileReader;
+import java.io.IOException;
+
+
 /**
  *
  * @author jecheverria
  */
 
 enum Tipo{
-    AEREO,
-    CONTACTO,
-    MEDIOALCANCE,
-    CHOQUE;
+    AEREO(1),
+    CONTACTO(1),
+    MEDIOALCANCE(1),
+    IMPACTO(1),
+    BLOQUE(1),
+    ATAQUEMULTIPLE(1);
+
+    private final int campos;
+
+    private Tipo() {
+        this.campos = 0;
+    }
+
+    private Tipo(int campos) {
+        this.campos = campos;
+    }
+
+
 }
 
 public class Personaje {
@@ -28,6 +51,15 @@ public class Personaje {
 
     public Tipo getTipoDeAtaque(){
         return this.TipoDeAtaque;
+    }
+
+    public Personaje(int Vida, int DañoPorSegundo, String Nombre, String Apariencia, Tipo TipoDeAtaque, int NivelAparicion) {
+        this.Vida = Vida;
+        this.DañoPorSegundo = DañoPorSegundo;
+        this.Nombre = Nombre;
+        this.Apariencia = Apariencia;
+        this.TipoDeAtaque = TipoDeAtaque;
+        this.NivelAparicion = NivelAparicion;
     }
     
     public void setTipoDeAtaque(Tipo tipodeataque){
@@ -89,6 +121,11 @@ public class Personaje {
     public void setNivelAparicion(int NivelAparicion) {
         this.NivelAparicion = NivelAparicion;
     }
+    
+    public void tostring(){
+        System.out.println("Hola soy "+ this.Nombre + " y ataco " +this.TipoDeAtaque);
+    }
+    
 
 
 }

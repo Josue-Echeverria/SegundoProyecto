@@ -9,6 +9,10 @@ import com.mycompany.segundoproyecto.funciones.Personaje;
 import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Zombie;
 import com.mycompany.segundoproyecto.configuracion.Principal;
+import com.mycompany.segundoproyecto.funciones.Modelo;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -19,6 +23,12 @@ public class SegundoProyecto {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        new Principal().setVisible(true);
+       // new Principal().setVisible(true);
+        try {
+            // 
+            new Modelo().read_personajes();
+        } catch (IOException ex) {
+            Logger.getLogger(SegundoProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
