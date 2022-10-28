@@ -30,7 +30,11 @@ public class VentanaJuego extends javax.swing.JFrame {
         initComponents();
 
         creaMatrizJugable();
+<<<<<<< Updated upstream
         ThreadCaminar tr = new ThreadCaminar("base", 0, 0, 16, 10);
+=======
+        ThreadCaminar tr = new ThreadCaminar("Gales.png", 0, 0, 16, 10);
+>>>>>>> Stashed changes
         tr.start();
         
         
@@ -44,7 +48,11 @@ public class VentanaJuego extends javax.swing.JFrame {
                 boton.setSize(tamañobotones,tamañobotones);
                 boton.setLocation(j*tamañobotones, i*tamañobotones);
                 boton.setText(j+"-"+i);
+<<<<<<< Updated upstream
                 boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"base.png"));
+=======
+                boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"Base.png"));
+>>>>>>> Stashed changes
                 Datos.matrizBotonesInterfaz[j][i] = boton;
                 if (i == 0 || i == 26){
                     boton.setBackground(Color.red);
