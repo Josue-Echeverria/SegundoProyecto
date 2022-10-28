@@ -4,6 +4,15 @@
  */
 package com.mycompany.segundoproyecto.configuracion;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+import java.io.BufferedWriter;
+
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author jecheverria
@@ -46,7 +55,12 @@ public class Principal extends javax.swing.JFrame {
         lbl_TipoAtaque = new javax.swing.JLabel();
         cb_tiposdeAtaque = new javax.swing.JComboBox<>();
         lbl_Apariencia = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_image = new javax.swing.JLabel();
+        btn_crear = new javax.swing.JButton();
+        txf_alcance = new javax.swing.JTextField();
+        lbl_alcance = new javax.swing.JLabel();
+        txf_apariencia = new javax.swing.JTextField();
+        btn_guardar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,8 +132,6 @@ public class Principal extends javax.swing.JFrame {
 
         lbl_TipoAtaque.setText("Tipo de Ataque");
 
-        cb_tiposdeAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contacto", "Mediano alcance", "Aéreos", "Impacto", "Ataque múltiple", "Bloques" }));
-        cb_tiposdeAtaque.setSelectedIndex(-1);
         cb_tiposdeAtaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tiposdeAtaqueActionPerformed(evt);
@@ -128,7 +140,34 @@ public class Principal extends javax.swing.JFrame {
 
         lbl_Apariencia.setText("Apariencia");
 
-        jLabel2.setText("Imagen");
+        btn_crear.setText("Generar");
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearActionPerformed(evt);
+            }
+        });
+
+        txf_alcance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_alcanceActionPerformed(evt);
+            }
+        });
+
+        lbl_alcance.setText("Alcance");
+
+        txf_apariencia.setText("C:\\Users\\jecheverria\\Personajes\\Zombie1.png");
+        txf_apariencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_aparienciaActionPerformed(evt);
+            }
+        });
+
+        btn_guardar.setText("Ver");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,9 +176,28 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(btn_crear))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_alcance)
+                            .addComponent(txf_alcance, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_vida))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_TipoAtaque)
+                                    .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl_daño)
+                                .addComponent(lbl_nvlAparicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txf_nvlAparicion)
+                                .addComponent(txf_daño, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,66 +205,73 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_tipoPersonaje)
-                                    .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lbl_daño)
-                                        .addComponent(lbl_nvlAparicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txf_nvlAparicion)
-                                        .addComponent(txf_daño)
-                                        .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lbl_vida))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_TipoAtaque)
-                                    .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_Apariencia)
+                    .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txf_apariencia, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Apariencia))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_nombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_Apariencia, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txf_apariencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_guardar))
+                        .addGap(12, 12, 12)
+                        .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_TipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lbl_nombre)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(28, 28, 28)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lbl_TipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lbl_vida)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_vida)
+                                        .addComponent(lbl_tipoPersonaje)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
+                                        .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbl_daño)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txf_daño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbl_nvlAparicion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txf_nvlAparicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_tipoPersonaje)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_Apariencia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                                .addComponent(txf_nvlAparicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(lbl_alcance)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txf_alcance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(72, 72, 72)
+                        .addComponent(btn_crear)
+                        .addGap(0, 57, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -229,39 +294,230 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txf_nvlAparicionActionPerformed
 
     private void cb_tiposPersonajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tiposPersonajeActionPerformed
-        if (cb_tiposPersonaje.getSelectedIndex() == -1){
-        }
-        
+
         if (cb_tiposPersonaje.getSelectedIndex() == 0){//Defensa
-
+            cb_tiposdeAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contacto", "Mediano alcance", "Aéreos", "Impacto","Ataque multiple", "Bloque"}));
+            cb_tiposdeAtaque.setSelectedIndex(-1);             
+            
 }
-if (cb_tiposPersonaje.getSelectedIndex() == 1){//Zombie
-      /*  pnl_tipoDeDefensa = new javax.swing.JPanel();
-        lbl_defensa = new javax.swing.JLabel();
-        cb_tiposdeZombies = new javax.swing.JComboBox<>();
-        cb_tiposdeZombies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contacto", "Mediano alcance", "Aéreos", "Impacto" }));
-        cb_tiposdeZombies.setSelectedIndex(-1);
+        if (cb_tiposPersonaje.getSelectedIndex() == 1){//Zombie
+            cb_tiposdeAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contacto", "Mediano alcance", "Aéreos", "Impacto" }));
+            cb_tiposdeAtaque.setSelectedIndex(-1);
 
-        lbl_tipoZombie.setText("Tipo de Zombie");
-
-        javax.swing.GroupLayout pnl_tipoDeZombieLayout = new javax.swing.GroupLayout(pnl_tipoDeZombie);
-        pnl_tipoDeZombie.setLayout(pnl_tipoDeZombieLayout);
-        pnl_tipoDeZombieLayout.setHorizontalGroup(
-            pnl_tipoDeZombieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_tipoDeZombieLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_tipoDeZombieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_tipoZombie)
-                    .addComponent(cb_tiposdeZombies, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );*/
 }
 // TODO add your handling code here:
     }//GEN-LAST:event_cb_tiposPersonajeActionPerformed
 
     private void cb_tiposdeAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tiposdeAtaqueActionPerformed
+        if (cb_tiposPersonaje.getSelectedIndex() == 0){//Defensa
+
+            if (cb_tiposdeAtaque.getSelectedIndex() == 0){//Contacto
+                txf_daño.setEditable(true);   
+    
+                txf_alcance.setText("1");
+                txf_alcance.setEditable(false);
+            }
+            
+            if (cb_tiposdeAtaque.getSelectedIndex() == 1 | cb_tiposdeAtaque.getSelectedIndex() == 4){//Mediano alcance o ataque multiple 
+                txf_alcance.setEnabled(true);
+                txf_alcance.setEditable(true);
+            }
+            
+            if (cb_tiposdeAtaque.getSelectedIndex()== 2){//Aereo
+                txf_alcance.setText("0");
+                txf_alcance.setEditable(false);
+            }
+
+            if (cb_tiposdeAtaque.getSelectedIndex()== 3){//Impacto(Kamikaze?)
+                txf_alcance.setText("1");
+                txf_alcance.setEditable(false);
+            }           
+            
+            if (cb_tiposdeAtaque.getSelectedIndex() == 5){//Bloque
+                txf_alcance.setText("0");
+                txf_alcance.setEditable(false);
+
+                txf_daño.setText("0");
+                txf_daño.setEditable(false);
+            }   
+        }
+        
+        if (cb_tiposPersonaje.getSelectedIndex() == 1){//ZOmbie
+            if (cb_tiposdeAtaque.getSelectedIndex()== 0){//Contacto
+                txf_alcance.setText("1");
+                txf_alcance.setEditable(false);
+            }
+        
+            if (cb_tiposdeAtaque.getSelectedIndex()== 1){//Mediano alcance
+                txf_alcance.setEnabled(true);
+                txf_alcance.setEditable(true);
+            }
+
+            if (cb_tiposdeAtaque.getSelectedIndex()== 2){//Aereo
+                txf_alcance.setText("0");
+                txf_alcance.setEditable(false);
+            }
+
+            if (cb_tiposdeAtaque.getSelectedIndex()== 3){//Impacto(Kamikaze?)
+                txf_alcance.setText("1");
+                txf_alcance.setEditable(false);
+
+            }
+        
+        
+        
+        }//Termina la condicion de los tipos de ataque del zombie
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tiposdeAtaqueActionPerformed
+
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
+        boolean errores = false;
+        
+        //TODO mandar los errores en la pantalla(ventana)
+        
+        String personaje_str = "%";
+            int tipo = cb_tiposPersonaje.getSelectedIndex();
+            int tipo_de_ataque = cb_tiposdeAtaque.getSelectedIndex();
+            switch (tipo){
+                
+                case 1://Se eligio zombie(Se escribe una Z)
+                    personaje_str += "Z/";
+                    switch (tipo_de_ataque){
+                        case -1 -> {
+                            errores = true;
+                            System.out.println("No se eligio el tipo de ataque del zombie");}
+                        
+                        case 0 -> personaje_str += "C/";
+                        
+                        case 1 -> personaje_str += "MA/";
+                        
+                        case 2 -> personaje_str += "A/";
+                        
+                        case 3 -> personaje_str += "I/";
+                    
+                    }//Final del switch para el tipos da ataque de zombie
+                    break;
+
+                    
+                case 0://Se eligio una defensa(Se escribe una D)
+                    
+                    personaje_str += "D/";
+                    switch (tipo_de_ataque){
+                        case -1 -> {
+                            errores = true;
+                            System.out.println("No se eligio el tipo de ataque del defensa");}
+                        
+                        case 0 -> personaje_str += "C/";
+                        
+                        case 1 -> personaje_str += "MA/";
+                        
+                        case 2 -> personaje_str += "A/";
+                        
+                        case 3 -> personaje_str += "I/";
+ 
+                        case 4 -> personaje_str += "AM/";
+                        
+                        case 5 -> personaje_str += "B/";
+                            
+                    }//Final del switch de tipo de ataque de la defensa
+                    break;
+
+                case -1:
+                    System.out.println("NO SE HA SELECCIONADO UN TIPO DE PERSONAJE");
+                    errores = true;
+                    break;
+            }
+            
+            //Nombre del personaje
+            if (txf_nombre.getText().length() == 0){
+                errores = true;
+                System.out.println("Su personaje ocupa un nombre");
+            }
+            else
+                personaje_str += txf_nombre.getText()+ "/";
+            
+            //Daño del personaje
+            try{
+                Integer.parseInt(txf_daño.getText());
+                personaje_str += txf_daño.getText()+ "/";
+            }
+            catch (Exception e){
+                System.out.println("Casilla de daño invalida");
+                errores = true;
+            }
+            
+            //Vida del personaje
+            try{
+                Integer.parseInt(txf_vida.getText());
+                personaje_str += txf_vida.getText()+ "/" ;
+            }
+            catch (Exception e){
+                errores = true;
+                System.out.println("Casilla de vida invalida");
+            }
+            
+            //Nivel de aparicion 
+            try{               
+                Integer.parseInt(txf_nvlAparicion.getText());
+                personaje_str += txf_nvlAparicion.getText()+"/";
+            }
+            catch (Exception e){
+                errores = true;        
+                System.out.println("Casilla de nivel de aparicion invalida");
+            }
+            
+            //Apariencia del personaje(direccion de imagen
+            if (txf_apariencia.getText().length() == 0){
+                errores = true;
+                System.out.println("Su personaje ocupa un apariencia");
+            }
+            else{
+                personaje_str += txf_apariencia.getText();
+            }  
+            
+            if (!errores){
+                System.out.println(personaje_str);
+                FileWriter escritor;
+                try {
+                    escritor = new FileWriter("Personajes.txt",true); 
+                    escritor.write(personaje_str);
+                    escritor.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }           
+            }
+// TODO add your handling code here:
+    }//GEN-LAST:event_btn_crearActionPerformed
+
+    private void txf_alcanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_alcanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_alcanceActionPerformed
+
+    private void txf_aparienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_aparienciaActionPerformed
+        
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_aparienciaActionPerformed
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        if (txf_apariencia.getText() == null || txf_apariencia.getText() == "(Path)"){
+        System.out.println("Ingrese el directorio donde se ecuentra la apariencia de su personaje");
+    }
+        else{
+            try{
+                lbl_image.setIcon(new javax.swing.ImageIcon(txf_apariencia.getText()));
+                System.out.println(txf_apariencia.getText());
+            }catch(Exception e){
+                System.out.println("No se encontro la imagen en la direccion");
+            }
+        }
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,15 +550,17 @@ if (cb_tiposPersonaje.getSelectedIndex() == 1){//Zombie
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btn_crear;
+    public javax.swing.JButton btn_guardar;
     public javax.swing.JComboBox<String> cb_tiposPersonaje;
     public javax.swing.JComboBox<String> cb_tiposdeAtaque;
     public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
     public javax.swing.JMenuItem jMenuItem1;
@@ -311,11 +569,15 @@ if (cb_tiposPersonaje.getSelectedIndex() == 1){//Zombie
     public javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     public javax.swing.JLabel lbl_Apariencia;
     public javax.swing.JLabel lbl_TipoAtaque;
+    public javax.swing.JLabel lbl_alcance;
     public javax.swing.JLabel lbl_daño;
+    public javax.swing.JLabel lbl_image;
     public javax.swing.JLabel lbl_nombre;
     public javax.swing.JLabel lbl_nvlAparicion;
     public javax.swing.JLabel lbl_tipoPersonaje;
     public javax.swing.JLabel lbl_vida;
+    public javax.swing.JTextField txf_alcance;
+    public javax.swing.JTextField txf_apariencia;
     public javax.swing.JTextField txf_daño;
     public javax.swing.JTextField txf_nombre;
     public javax.swing.JTextField txf_nvlAparicion;

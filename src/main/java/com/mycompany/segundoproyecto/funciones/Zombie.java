@@ -9,5 +9,10 @@ package com.mycompany.segundoproyecto.funciones;
  * @author jecheverria
  */
 public class Zombie extends Personaje{
+
+    public Zombie(String Nombre, int Vida, int DañoPorSegundo, int NivelAparicion, String Apariencia, Tipo TipoDeAtaque) {
+        super(Vida, DañoPorSegundo, Nombre, Apariencia, TipoDeAtaque, NivelAparicion);
+    }
+
     
 }
