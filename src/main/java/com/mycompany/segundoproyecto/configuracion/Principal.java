@@ -155,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
 
         lbl_alcance.setText("Alcance");
 
-        txf_apariencia.setText("C:\\Users\\jecheverria\\Personajes\\Zombie1.png");
+        txf_apariencia.setText("C:\\Users\\PC\\Pictures\\Personajes\\Zombie1.png");
         txf_apariencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txf_aparienciaActionPerformed(evt);
@@ -487,6 +487,7 @@ public class Principal extends javax.swing.JFrame {
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }           
             }
+           
 // TODO add your handling code here:
     }//GEN-LAST:event_btn_crearActionPerformed
 

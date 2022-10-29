@@ -20,6 +20,8 @@ public class Modelo {
 
  public ArrayList<Personaje> read_personajes() throws FileNotFoundException, IOException{
         ArrayList<Personaje> personajes = new ArrayList();
+        ArrayList<Defensa> defensas = new ArrayList();
+        ArrayList<Zombie> zombies = new ArrayList();
         File file = new File("Personajes.txt");
         BufferedReader Lector = new BufferedReader(new FileReader(file));
         String archivo;
@@ -53,6 +55,8 @@ public class Modelo {
                     }
                     personajes.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
                         ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                    defensas.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
+                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
                 }
 
                 if (atributos[0].equals("Z")){
@@ -71,7 +75,9 @@ public class Modelo {
                             break;
                     }
                     personajes.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[4]),atributos[5],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                    zombies.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
+                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
                 }
             }
             else{}
@@ -79,5 +85,92 @@ public class Modelo {
         for (Personaje persona : personajes){
             persona.tostring();}
         return personajes;
+    }
+
+
+public ArrayList<Defensa> read_Defensas() throws FileNotFoundException, IOException{
+        ArrayList<Defensa> defensas = new ArrayList(); 
+        File file = new File("Personajes.txt");
+        BufferedReader Lector = new BufferedReader(new FileReader(file));
+        String archivo;
+        archivo = Lector.readLine();
+        String[] personajes_archivo = archivo.split("%");
+        for (String personaje : personajes_archivo){
+            
+            String[] atributos = personaje.split("/");
+            Tipo tipo_personaje = null;
+            if (atributos.length == 7){
+                if (atributos[0].equals("D")){
+                    switch(atributos[1]){
+                            case "C":
+                                tipo_personaje = Tipo.CONTACTO;
+                                break;
+                            case "MA":
+                                tipo_personaje = Tipo.MEDIOALCANCE;                   
+                                break;
+                            case "A":
+                                tipo_personaje = Tipo.AEREO;
+                                break;
+                            case "I":      
+                                tipo_personaje = Tipo.IMPACTO;
+                                break;         
+                            case "AM":
+                                tipo_personaje = Tipo.ATAQUEMULTIPLE;
+                                break;
+                            case "B":      
+                                tipo_personaje = Tipo.BLOQUE;
+                                break;
+                    }
+                    
+                    defensas.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
+                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                }
+   
+            }
+            else{}
+        }
+        for (Defensa persona : defensas){
+            persona.tostring();}
+        return defensas;
+    }
+
+public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOException{
+        ArrayList<Zombie> zombies = new ArrayList();
+        File file = new File("Personajes.txt");
+        BufferedReader Lector = new BufferedReader(new FileReader(file));
+        String archivo;
+        archivo = Lector.readLine();
+        String[] personajes_archivo = archivo.split("%");
+        for (String personaje : personajes_archivo){
+            
+            String[] atributos = personaje.split("/");
+            Tipo tipo_personaje = null;
+            if (atributos.length == 7){
+
+                if (atributos[0].equals("Z")){
+                    switch(atributos[1]){
+                        case "C":
+                            tipo_personaje = Tipo.CONTACTO;
+                            break;
+                        case "MA":
+                            tipo_personaje = Tipo.MEDIOALCANCE;                   
+                            break;
+                        case "A":
+                            tipo_personaje = Tipo.AEREO;
+                            break;
+                        case "I":      
+                            tipo_personaje = Tipo.IMPACTO;
+                            break;
+                    }
+
+                    zombies.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
+                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                }
+            }
+            else{}
+        }
+        for (Zombie persona : zombies){
+            persona.tostring();}
+        return zombies;
     }
 }

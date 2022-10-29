@@ -7,11 +7,20 @@ package com.mycompany.segundoproyecto.configuracion;
 import com.mycompany.segundoproyecto.Datos;
 import com.mycompany.segundoproyecto.Funciones;
 import com.mycompany.segundoproyecto.ThreadCaminar;
+import com.mycompany.segundoproyecto.funciones.Personaje;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,18 +35,49 @@ public class VentanaJuego extends javax.swing.JFrame {
      */
     public VentanaJuego() {
         Datos ha = new Datos();
-        
         initComponents();
-
         creaMatrizJugable();
-<<<<<<< Updated upstream
-        ThreadCaminar tr = new ThreadCaminar("base", 0, 0, 16, 10);
-=======
-        ThreadCaminar tr = new ThreadCaminar("Gales.png", 0, 0, 16, 10);
->>>>>>> Stashed changes
+        creaMatrixPersonaje();
+        Personaje prueba = Datos.personajes.get(0);
+        ThreadCaminar tr = new ThreadCaminar(prueba.getApariencia(), 0, 0, 16, 10);
         tr.start();
         
         
+    }
+    public void creaMatrixPersonaje(){
+        int contadorfila = 1;
+        int contadorColumna = 1;
+        int largo = Datos.defensas.size();
+        for (int i = 0;i< largo;i++) {
+            JButton boton = new javax.swing.JButton();
+            boton.setSize(tamañobotones,tamañobotones);
+            boton.setLocation(contadorColumna*tamañobotones, contadorfila*tamañobotones);
+            boton.setText(Datos.defensas.get(i).getApariencia());
+            
+            try {
+                
+                String aparienciaDisponible = Datos.defensas.get(i).getApariencia();
+                
+                BufferedImage bufferedImage;
+                bufferedImage = ImageIO.read(new File(aparienciaDisponible));
+                Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon(image);
+                boton.setIcon(icon);
+            } catch (IOException ex) {
+                System.out.println("error al cargar imagen de "+Datos.personajes.get(i).getNombre()+" en disponibles");
+                
+            }
+            boton.addActionListener(al2);
+            
+            pnlDisponibles.add(boton);
+            
+            if(contadorColumna == 4 ){
+                contadorfila += 1;
+                contadorColumna = 0;
+            }
+            contadorColumna += 1;
+            
+        }
     }
    
     public void creaMatrizJugable(){
@@ -48,24 +88,22 @@ public class VentanaJuego extends javax.swing.JFrame {
                 boton.setSize(tamañobotones,tamañobotones);
                 boton.setLocation(j*tamañobotones, i*tamañobotones);
                 boton.setText(j+"-"+i);
-<<<<<<< Updated upstream
-                boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"base.png"));
-=======
-                boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"Base.png"));
->>>>>>> Stashed changes
+
+                //boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"Base.png"));
+
                 Datos.matrizBotonesInterfaz[j][i] = boton;
                 if (i == 0 || i == 26){
                     boton.setBackground(Color.red);
                     Datos.matrizBotonesApareceZombies[contador] = boton;
                     contador+=1;
-                    boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"BaseBloqueada.png"));
+                    //boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"BaseBloqueada.png"));
                     
                 }else{
                     if(j == 0 || j == 26){
                         boton.setBackground(Color.red);
                         Datos.matrizBotonesApareceZombies[contador] = boton;
                         contador+=1;
-                        boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"BaseBloqueada.png"));
+                        //boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"BaseBloqueada.png"));
                     }
                 }
                 
@@ -76,6 +114,21 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
         }
     }
+    
+    ActionListener al2=new ActionListener(){
+        public void actionPerformed (){
+            System.out.println("holaaaaaaaaaaaa");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton boton = (JButton) e.getSource();
+            Datos.accionMouse = Datos.EstadoHaciendoMouse.CARGANDOPERSONAJE;
+            Datos.personajeCargando = boton.getText();
+            System.out.println(boton.getText());
+            
+        }
+      };
     ActionListener al=new ActionListener(){
         public void actionPerformed (){
             System.out.println("holaaaaaaaaaaaa");
@@ -107,34 +160,52 @@ public class VentanaJuego extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFondo = new javax.swing.JPanel();
+        pnlDisponibles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(840, 840));
+        setResizable(false);
 
+        pnlFondo.setBackground(new java.awt.Color(153, 51, 0));
         pnlFondo.setPreferredSize(new java.awt.Dimension(830, 830));
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
         pnlFondoLayout.setHorizontalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
         pnlFondoLayout.setVerticalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 858, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+
+        pnlDisponibles.setBackground(new java.awt.Color(0, 255, 0));
+
+        javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
+        pnlDisponibles.setLayout(pnlDisponiblesLayout);
+        pnlDisponiblesLayout.setHorizontalGroup(
+            pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 246, Short.MAX_VALUE)
+        );
+        pnlDisponiblesLayout.setVerticalGroup(
+            pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+            .addComponent(pnlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -176,6 +247,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel pnlDisponibles;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables
 }
