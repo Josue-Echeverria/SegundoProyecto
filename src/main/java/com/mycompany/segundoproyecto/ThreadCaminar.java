@@ -52,7 +52,7 @@ public class ThreadCaminar extends Thread {
         quienResta = Cordenada.x;
         this.personaje = personaje;
         
-        Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Defensa3.png"));
+        //Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Defensa3.png"));
         
         
         

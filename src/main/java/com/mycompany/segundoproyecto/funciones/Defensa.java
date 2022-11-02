@@ -17,5 +17,11 @@ public class Defensa extends Personaje{
         super(Vida, DañoPorSegundo, Nombre, Apariencia, TipoDeAtaque, NivelAparicion);
     }
     
+   
+   
+    
+
+    
+    
     
 }

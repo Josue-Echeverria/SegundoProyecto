@@ -8,17 +8,24 @@ package com.mycompany.segundoproyecto;
 import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Modelo;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+
 import com.mycompany.segundoproyecto.funciones.Zombie;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
  *
  * @author deyla
  */
+
 
 public class Datos {
     static public enum EstadoHaciendoMouse{
@@ -35,6 +42,7 @@ public class Datos {
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
     static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+    static public Defensa Pilar;
     static public int[] coordsPilar;
     public Datos() {
         accionMouse = EstadoHaciendoMouse.NADA;
@@ -43,9 +51,12 @@ public class Datos {
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
         defensasDisponibles = new ArrayList<>();
-        coordsPilar = new int[2];
-        coordsPilar[0] = 5;
-        coordsPilar[1] = 8;
+       
+        
+        
+        
+        //***************
+        
         
         try {
             personajes =  new Modelo().read_personajes();
@@ -54,6 +65,25 @@ public class Datos {
         } catch (IOException ex) {
             System.out.println("Error");
         }
+    }
+    public static void ponePilar(int j,int i){
+         //***********************
+        ArrayList<ImageIcon> images = new ArrayList();
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(new File(ruta+"Defensa6.png"));
+            Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            images.add(new ImageIcon(image));
+            Pilar= new Defensa("Pilar",0,0,1,images,Personaje.tipoPilar);
+            coordsPilar = new int[2];
+            coordsPilar[0] = j;
+            coordsPilar[1] = i;
+            matrizBotonesInterfaz[coordsPilar[1]][coordsPilar[0]].setIcon(Pilar.getApariencia().get(0));
+            matrizPersonajes[coordsPilar[1]][coordsPilar[0]] = Pilar;
+        } catch (IOException ex) {
+            System.out.println("no cargo la imagen del pilar");
+        }
+        
     }
     
     

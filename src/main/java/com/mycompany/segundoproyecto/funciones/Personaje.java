@@ -41,6 +41,7 @@ enum Tipo{
 }
 
 public class Personaje {
+    public static Tipo tipoPilar = Tipo.CONTACTO;
     private int Vida;
     private int DañoPorSegundo;
     private String Nombre;
