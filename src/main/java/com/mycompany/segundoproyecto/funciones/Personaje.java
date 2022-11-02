@@ -62,6 +62,21 @@ public class Personaje {
         this.TipoDeAtaque = TipoDeAtaque;
         this.NivelAparicion = NivelAparicion;
     }
+    public String getTipoDeAtaqueString(){
+        if(this.TipoDeAtaque == Tipo.AEREO)
+            return "Aereo";
+        if(this.TipoDeAtaque == Tipo.ATAQUEMULTIPLE)
+            return "Ataque multiple";
+        if(this.TipoDeAtaque == Tipo.BLOQUE)
+            return "Bloque";
+        if(this.TipoDeAtaque == Tipo.CONTACTO)
+            return "Contacto";
+        if(this.TipoDeAtaque == Tipo.IMPACTO)
+            return "Impacto";
+        else
+            return "Medio alcance";
+        
+    }
     
     public void setTipoDeAtaque(Tipo tipodeataque){
         this.TipoDeAtaque = tipodeataque;

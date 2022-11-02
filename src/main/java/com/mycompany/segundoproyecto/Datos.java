@@ -26,9 +26,11 @@ public class Datos {
     NADA;
     }
     static public JButton[][] matrizBotonesInterfaz;
+    static public Personaje[][] matrizPersonajes;
     static public JButton[] matrizBotonesApareceZombies;
     static public ArrayList<Personaje> personajes;
     static public ArrayList<Defensa> defensas;
+    static public ArrayList<Defensa> defensasDisponibles;
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
@@ -37,7 +39,9 @@ public class Datos {
         accionMouse = EstadoHaciendoMouse.NADA;
         personajeCargando = null;
         matrizBotonesInterfaz = new JButton[27][27];
+        matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
+        defensasDisponibles = new ArrayList<>();
         try {
             personajes =  new Modelo().read_personajes();
             defensas =  new Modelo().read_Defensas();

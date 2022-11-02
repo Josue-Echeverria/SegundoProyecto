@@ -39,7 +39,8 @@ public class VentanaJuego extends javax.swing.JFrame {
         creaMatrizJugable();
         creaMatrixPersonaje();
         Personaje prueba = Datos.personajes.get(0);
-        ThreadCaminar tr = new ThreadCaminar(prueba.getApariencia().get(0), 0, 0, 21, 10);
+
+        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0, 16, 10);
         tr.start();
         
         
@@ -52,7 +53,10 @@ public class VentanaJuego extends javax.swing.JFrame {
             JButton boton = new javax.swing.JButton();
             boton.setSize(tamañobotones,tamañobotones);
             boton.setLocation(contadorColumna*tamañobotones, contadorfila*tamañobotones);
-            //boton.setText(Datos.defensas.get(i).getApariencia().get(0));
+
+            boton.setText(Datos.defensas.get(i).getApariencia()+ "%"+i);
+            
+            //try {
                 
                 ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
                 

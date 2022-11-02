@@ -5,6 +5,7 @@
  */
 package com.mycompany.segundoproyecto;
 
+import com.mycompany.segundoproyecto.funciones.Personaje;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,6 +29,9 @@ public class ThreadCaminar extends Thread {
     private boolean isRunning = true;
     private boolean isPaused = false;
     ImageIcon imagen;
+
+    String imagen2;
+    public Personaje personaje;
     int iinicio;
     int jinicio;
     int ifinal;
@@ -37,19 +41,20 @@ public class ThreadCaminar extends Thread {
     public int coordsanterior[];
     
 
-    public ThreadCaminar(ImageIcon imagen, int iinicio, int jinicio, int ifinal, int jfinal) {
-        this.imagen = imagen;
+
+    public ThreadCaminar(Personaje personaje, int iinicio, int jinicio, int ifinal, int jfinal) {
+        this.imagen = personaje.getApariencia().get(0);
         this.iinicio = iinicio;
         this.jinicio = jinicio;
         this.ifinal = ifinal;
         this.jfinal = jfinal;
         quienResta = Cordenada.x;
+        this.personaje = personaje;
         
-       // Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
-       // Datos.matrizBotonesInterfaz[10][10].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
-        Datos.matrizBotonesInterfaz[5][7].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
+        Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
         
-        System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon());
+        
+        
     }
     
     
@@ -94,7 +99,7 @@ public class ThreadCaminar extends Thread {
                     quienResta = Cordenada.x;
                           
                 }
-                System.out.println(coordInicio);
+                
                 
                 
                 try {
@@ -107,6 +112,7 @@ public class ThreadCaminar extends Thread {
                         System.out.println(Datos.ruta+"Base.png");*/
                     }
                 } catch (Exception e) {
+                   
                 }
                 
                 
@@ -119,10 +125,15 @@ public class ThreadCaminar extends Thread {
                 try {
                     sleep(500);
                     System.out.println("Atacando");
+                    Datos.matrizPersonajes[jinicio][iinicio].setVida(Datos.matrizPersonajes[jinicio][iinicio].getVida()-Datos.matrizPersonajes[jinicio][iinicio].getDañoPorSegundo());
+                    if(Datos.matrizPersonajes[jinicio][iinicio].getVida() <= 0){
+                        pausa();
+                    }
                 } catch (InterruptedException ex) {
                 }
             }
                Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(null);
+               Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]] = (null);
                 //String hola = Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon();
                 /*if(borde){
                     int contador = 0;
@@ -139,6 +150,7 @@ public class ThreadCaminar extends Thread {
                     }
                 }*/
             Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(new javax.swing.ImageIcon(Datos.ruta+imagen));
+            Datos.matrizPersonajes[jinicio][iinicio] = personaje;
             
         }
         
