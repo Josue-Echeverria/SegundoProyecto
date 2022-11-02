@@ -27,7 +27,7 @@ import javax.swing.JButton;
 public class ThreadCaminar extends Thread {
     private boolean isRunning = true;
     private boolean isPaused = false;
-    String imagen;
+    ImageIcon imagen;
     int iinicio;
     int jinicio;
     int ifinal;
@@ -37,7 +37,7 @@ public class ThreadCaminar extends Thread {
     public int coordsanterior[];
     
 
-    public ThreadCaminar(String imagen, int iinicio, int jinicio, int ifinal, int jfinal) {
+    public ThreadCaminar(ImageIcon imagen, int iinicio, int jinicio, int ifinal, int jfinal) {
         this.imagen = imagen;
         this.iinicio = iinicio;
         this.jinicio = jinicio;
@@ -45,8 +45,9 @@ public class ThreadCaminar extends Thread {
         this.jfinal = jfinal;
         quienResta = Cordenada.x;
         
-        Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
-        Datos.matrizBotonesInterfaz[10][10].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
+       // Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
+       // Datos.matrizBotonesInterfaz[10][10].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
+        Datos.matrizBotonesInterfaz[5][7].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
         
         System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon());
     }
@@ -56,19 +57,13 @@ public class ThreadCaminar extends Thread {
     @Override
     public void run(){
         while (isRunning){
-            
             try {
-                BufferedImage bufferedImage = ImageIO.read(new File(imagen));
-                Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-
-                ImageIcon icon = new ImageIcon(image);
-
                 // Definir nuevas dimensiones
                 
                 
                 coordsanterior = new int[]{jinicio,iinicio};
                 Icon icono = Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon();
-                Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(icon);
+                Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(imagen);
                 String coordInicio = ""+ iinicio+"-"+jinicio;
                 sleep(1000);
                 if (iinicio == ifinal && jinicio == jfinal){
@@ -118,8 +113,6 @@ public class ThreadCaminar extends Thread {
                 
                 
             } catch (InterruptedException ex) {
-            } catch (IOException ex) {
-                Logger.getLogger(ThreadCaminar.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             while (isPaused) {                

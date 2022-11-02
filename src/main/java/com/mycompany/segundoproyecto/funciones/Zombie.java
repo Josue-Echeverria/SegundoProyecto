@@ -4,13 +4,16 @@
  */
 package com.mycompany.segundoproyecto.funciones;
 
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author jecheverria
  */
 public class Zombie extends Personaje{
 
-    public Zombie(String Nombre, int Vida, int DañoPorSegundo, int NivelAparicion, String Apariencia, Tipo TipoDeAtaque) {
+    public Zombie(String Nombre, int Vida, int DañoPorSegundo, int NivelAparicion, ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque) {
         super(Vida, DañoPorSegundo, Nombre, Apariencia, TipoDeAtaque, NivelAparicion);
     }
 

@@ -4,13 +4,18 @@
  */
 package com.mycompany.segundoproyecto.configuracion;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
+import java.io.File;
 
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -54,13 +59,17 @@ public class Principal extends javax.swing.JFrame {
         lbl_tipoPersonaje = new javax.swing.JLabel();
         lbl_TipoAtaque = new javax.swing.JLabel();
         cb_tiposdeAtaque = new javax.swing.JComboBox<>();
-        lbl_Apariencia = new javax.swing.JLabel();
-        lbl_image = new javax.swing.JLabel();
+        lbl_AparienciaMoviendose = new javax.swing.JLabel();
         btn_crear = new javax.swing.JButton();
         txf_alcance = new javax.swing.JTextField();
         lbl_alcance = new javax.swing.JLabel();
-        txf_apariencia = new javax.swing.JTextField();
-        btn_guardar = new javax.swing.JButton();
+        txf_aparienciaMoviendose = new javax.swing.JTextField();
+        btn_guardarMoviendose = new javax.swing.JButton();
+        lbl_imageMoviendose = new javax.swing.JLabel();
+        lbl_AparienciaAtacando = new javax.swing.JLabel();
+        txf_aparienciaAtacando = new javax.swing.JTextField();
+        btn_guardarAtacando = new javax.swing.JButton();
+        lbl_imageAtacando = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        lbl_Apariencia.setText("Apariencia");
+        lbl_AparienciaMoviendose.setText("Apariencia moviendose");
 
         btn_crear.setText("Generar");
         btn_crear.addActionListener(new java.awt.event.ActionListener() {
@@ -155,17 +164,34 @@ public class Principal extends javax.swing.JFrame {
 
         lbl_alcance.setText("Alcance");
 
-        txf_apariencia.setText("C:\\Users\\PC\\Pictures\\Personajes\\Zombie1.png");
-        txf_apariencia.addActionListener(new java.awt.event.ActionListener() {
+        txf_aparienciaMoviendose.setText("C:\\Users\\Jecheverria\\Personajes\\Zombie1.png");
+        txf_aparienciaMoviendose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txf_aparienciaActionPerformed(evt);
+                txf_aparienciaMoviendoseActionPerformed(evt);
             }
         });
 
-        btn_guardar.setText("Ver");
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+        btn_guardarMoviendose.setText("Ver");
+        btn_guardarMoviendose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
+                btn_guardarMoviendoseActionPerformed(evt);
+            }
+        });
+
+        lbl_AparienciaAtacando.setText("Apariencia atacando");
+
+        txf_aparienciaAtacando.setText("C:\\Users\\Jecheverria\\Personajes\\Zombie1.png");
+        txf_aparienciaAtacando.setToolTipText("");
+        txf_aparienciaAtacando.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_aparienciaAtacandoActionPerformed(evt);
+            }
+        });
+
+        btn_guardarAtacando.setText("Ver");
+        btn_guardarAtacando.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarAtacandoActionPerformed(evt);
             }
         });
 
@@ -173,48 +199,55 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_vida)
+                    .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_nombre)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lbl_daño)
+                        .addComponent(lbl_nvlAparicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txf_nvlAparicion)
+                        .addComponent(txf_daño, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_alcance)
+                    .addComponent(txf_alcance, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tipoPersonaje)
+                    .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_TipoAtaque)
+                    .addComponent(btn_crear))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(btn_crear))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_alcance)
-                            .addComponent(txf_alcance, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_vida))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_TipoAtaque)
-                                    .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbl_daño)
-                                .addComponent(lbl_nvlAparicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txf_nvlAparicion)
-                                .addComponent(txf_daño, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(lbl_AparienciaAtacando)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btn_guardarAtacando, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txf_aparienciaAtacando, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lbl_AparienciaMoviendose)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btn_guardarMoviendose, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txf_aparienciaMoviendose, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_nombre))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_tipoPersonaje)
-                                    .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_Apariencia)
-                    .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txf_apariencia, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                                .addGap(34, 34, 34)
+                                .addComponent(lbl_imageMoviendose, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_imageAtacando, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,56 +255,59 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_Apariencia, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txf_apariencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_guardar))
-                        .addGap(12, 12, 12)
-                        .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_nombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_nombre)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(28, 28, 28)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(lbl_TipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(lbl_vida)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_tipoPersonaje)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_daño)
+                                .addGap(28, 28, 28)
+                                .addComponent(lbl_vida)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txf_daño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_nvlAparicion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txf_nvlAparicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(lbl_alcance)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txf_alcance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(72, 72, 72)
-                        .addComponent(btn_crear)
-                        .addGap(0, 57, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(txf_vida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_daño)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txf_daño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_nvlAparicion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txf_nvlAparicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_alcance)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txf_alcance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_AparienciaMoviendose, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_guardarMoviendose))
+                        .addGap(9, 9, 9)
+                        .addComponent(txf_aparienciaMoviendose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_imageMoviendose, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_AparienciaAtacando, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_guardarAtacando))
+                        .addGap(9, 9, 9)
+                        .addComponent(txf_aparienciaAtacando, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_tipoPersonaje)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb_tiposPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_TipoAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(cb_tiposdeAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(btn_crear))
+                    .addComponent(lbl_imageAtacando, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -467,14 +503,23 @@ public class Principal extends javax.swing.JFrame {
                 System.out.println("Casilla de nivel de aparicion invalida");
             }
             
-            //Apariencia del personaje(direccion de imagen
-            if (txf_apariencia.getText().length() == 0){
+            //Apariencia del personaje moviendose (direccion de imagen
+            if (txf_aparienciaMoviendose.getText().length() == 0){
                 errores = true;
                 System.out.println("Su personaje ocupa un apariencia");
             }
             else{
-                personaje_str += txf_apariencia.getText();
-            }  
+                personaje_str += txf_aparienciaMoviendose.getText()+ "/";
+            }
+            
+            
+            //Apariencia del personaje atacando(direccion de imagen)
+            if (txf_aparienciaAtacando.getText().length() == 0 & txf_aparienciaMoviendose.getText().length() != 0){
+                personaje_str += txf_aparienciaMoviendose.getText();
+            }
+            else{
+                personaje_str += txf_aparienciaAtacando.getText();
+            }
             
             if (!errores){
                 System.out.println(personaje_str);
@@ -495,22 +540,28 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txf_alcanceActionPerformed
 
-    private void txf_aparienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_aparienciaActionPerformed
+    private void txf_aparienciaMoviendoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_aparienciaMoviendoseActionPerformed
         
 
 
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_txf_aparienciaActionPerformed
+    }//GEN-LAST:event_txf_aparienciaMoviendoseActionPerformed
 
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        if (txf_apariencia.getText() == null || txf_apariencia.getText() == "(Path)"){
+    private void btn_guardarMoviendoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarMoviendoseActionPerformed
+        if (txf_aparienciaMoviendose.getText() == null ){
         System.out.println("Ingrese el directorio donde se ecuentra la apariencia de su personaje");
     }
         else{
             try{
-                lbl_image.setIcon(new javax.swing.ImageIcon(txf_apariencia.getText()));
-                System.out.println(txf_apariencia.getText());
+                //lbl_image.setIcon(new javax.swing.ImageIcon());
+                 
+                BufferedImage bufferedImage;
+                bufferedImage = ImageIO.read(new File(txf_aparienciaMoviendose.getText()));
+                Image image = bufferedImage.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon(image);
+                lbl_imageMoviendose.setIcon((icon));
+                System.out.println(txf_aparienciaMoviendose.getText());
             }catch(Exception e){
                 System.out.println("No se encontro la imagen en la direccion");
             }
@@ -518,7 +569,31 @@ public class Principal extends javax.swing.JFrame {
 
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_guardarActionPerformed
+    }//GEN-LAST:event_btn_guardarMoviendoseActionPerformed
+
+    private void txf_aparienciaAtacandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_aparienciaAtacandoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_aparienciaAtacandoActionPerformed
+
+    private void btn_guardarAtacandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarAtacandoActionPerformed
+        if (txf_aparienciaAtacando.getText() == null ){
+        System.out.println("Ingrese el directorio donde se ecuentra la apariencia de su personaje");
+    }
+        else{
+            try{
+                //lbl_image.setIcon(new javax.swing.ImageIcon());
+                 
+                BufferedImage bufferedImage;
+                bufferedImage = ImageIO.read(new File(txf_aparienciaAtacando.getText()));
+                Image image = bufferedImage.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon(image);
+                lbl_imageAtacando.setIcon((icon));
+                System.out.println(txf_aparienciaAtacando.getText());
+            }catch(Exception e){
+                System.out.println("No se encontro la imagen en la direccion");
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_guardarAtacandoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,7 +633,8 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_crear;
-    public javax.swing.JButton btn_guardar;
+    public javax.swing.JButton btn_guardarAtacando;
+    public javax.swing.JButton btn_guardarMoviendose;
     public javax.swing.JComboBox<String> cb_tiposPersonaje;
     public javax.swing.JComboBox<String> cb_tiposdeAtaque;
     public javax.swing.JLabel jLabel1;
@@ -568,17 +644,20 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel1;
     public javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     public javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    public javax.swing.JLabel lbl_Apariencia;
+    public javax.swing.JLabel lbl_AparienciaAtacando;
+    public javax.swing.JLabel lbl_AparienciaMoviendose;
     public javax.swing.JLabel lbl_TipoAtaque;
     public javax.swing.JLabel lbl_alcance;
     public javax.swing.JLabel lbl_daño;
-    public javax.swing.JLabel lbl_image;
+    public javax.swing.JLabel lbl_imageAtacando;
+    public javax.swing.JLabel lbl_imageMoviendose;
     public javax.swing.JLabel lbl_nombre;
     public javax.swing.JLabel lbl_nvlAparicion;
     public javax.swing.JLabel lbl_tipoPersonaje;
     public javax.swing.JLabel lbl_vida;
     public javax.swing.JTextField txf_alcance;
-    public javax.swing.JTextField txf_apariencia;
+    public javax.swing.JTextField txf_aparienciaAtacando;
+    public javax.swing.JTextField txf_aparienciaMoviendose;
     public javax.swing.JTextField txf_daño;
     public javax.swing.JTextField txf_nombre;
     public javax.swing.JTextField txf_nvlAparicion;

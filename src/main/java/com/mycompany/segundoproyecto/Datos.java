@@ -32,7 +32,7 @@ public class Datos {
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-    static public String ruta = "C:\\Users\\PC\\Documents\\ImagenesSegundoProyecto\\";
+    static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
     public Datos() {
         accionMouse = EstadoHaciendoMouse.NADA;
         personajeCargando = null;

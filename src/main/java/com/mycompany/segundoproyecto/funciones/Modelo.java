@@ -4,12 +4,16 @@
  */
 package com.mycompany.segundoproyecto.funciones;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,12 +30,22 @@ public class Modelo {
         BufferedReader Lector = new BufferedReader(new FileReader(file));
         String archivo;
         archivo = Lector.readLine();
+        
         String[] personajes_archivo = archivo.split("%");
         for (String personaje : personajes_archivo){
             
             String[] atributos = personaje.split("/");
+            
             Tipo tipo_personaje = null;
-            if (atributos.length == 7){
+            if (atributos.length == 8){
+                
+                ArrayList<ImageIcon> images = new ArrayList();
+                BufferedImage bufferedImage= ImageIO.read(new File(atributos[6]));
+                Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                images.add(new ImageIcon(image));
+                bufferedImage= ImageIO.read(new File(atributos[7]));;
+                image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+
                 if (atributos[0].equals("D")){
                     switch(atributos[1]){
                             case "C":
@@ -54,9 +68,9 @@ public class Modelo {
                                 break;
                     }
                     personajes.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),images ,tipo_personaje));
                     defensas.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
                 }
 
                 if (atributos[0].equals("Z")){
@@ -75,15 +89,13 @@ public class Modelo {
                             break;
                     }
                     personajes.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
                     zombies.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
                 }
             }
             else{}
         }
-        for (Personaje persona : personajes){
-            persona.tostring();}
         return personajes;
     }
 
@@ -96,10 +108,18 @@ public ArrayList<Defensa> read_Defensas() throws FileNotFoundException, IOExcept
         archivo = Lector.readLine();
         String[] personajes_archivo = archivo.split("%");
         for (String personaje : personajes_archivo){
-            
             String[] atributos = personaje.split("/");
+            
+            
             Tipo tipo_personaje = null;
-            if (atributos.length == 7){
+            if (atributos.length == 8){
+                ArrayList<ImageIcon> images = new ArrayList();  
+                BufferedImage bufferedImage= ImageIO.read(new File(atributos[6]));;
+                Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                images.add(new ImageIcon(image));
+                bufferedImage= ImageIO.read(new File(atributos[7]));;
+                image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            
                 if (atributos[0].equals("D")){
                     switch(atributos[1]){
                             case "C":
@@ -123,14 +143,11 @@ public ArrayList<Defensa> read_Defensas() throws FileNotFoundException, IOExcept
                     }
                     
                     defensas.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
                 }
-   
             }
             else{}
         }
-        for (Defensa persona : defensas){
-            persona.tostring();}
         return defensas;
     }
 
@@ -144,8 +161,16 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
         for (String personaje : personajes_archivo){
             
             String[] atributos = personaje.split("/");
+            
             Tipo tipo_personaje = null;
-            if (atributos.length == 7){
+            if (atributos.length == 8){
+
+                ArrayList<ImageIcon> images = new ArrayList();  
+                BufferedImage bufferedImage= ImageIO.read(new File(atributos[6]));;
+                Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                images.add(new ImageIcon(image));
+                bufferedImage= ImageIO.read(new File(atributos[7]));;
+                image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 
                 if (atributos[0].equals("Z")){
                     switch(atributos[1]){
@@ -164,13 +189,12 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
                     }
 
                     zombies.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),atributos[6],tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
                 }
             }
             else{}
         }
-        for (Zombie persona : zombies){
-            persona.tostring();}
+        
         return zombies;
     }
 }

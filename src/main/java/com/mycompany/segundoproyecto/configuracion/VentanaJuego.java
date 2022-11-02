@@ -39,7 +39,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         creaMatrizJugable();
         creaMatrixPersonaje();
         Personaje prueba = Datos.personajes.get(0);
-        ThreadCaminar tr = new ThreadCaminar(prueba.getApariencia(), 0, 0, 16, 10);
+        ThreadCaminar tr = new ThreadCaminar(prueba.getApariencia().get(0), 0, 0, 21, 10);
         tr.start();
         
         
@@ -52,21 +52,14 @@ public class VentanaJuego extends javax.swing.JFrame {
             JButton boton = new javax.swing.JButton();
             boton.setSize(tamañobotones,tamañobotones);
             boton.setLocation(contadorColumna*tamañobotones, contadorfila*tamañobotones);
-            boton.setText(Datos.defensas.get(i).getApariencia());
-            
-            try {
+            //boton.setText(Datos.defensas.get(i).getApariencia().get(0));
                 
-                String aparienciaDisponible = Datos.defensas.get(i).getApariencia();
+                ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
                 
-                BufferedImage bufferedImage;
-                bufferedImage = ImageIO.read(new File(aparienciaDisponible));
-                Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-                ImageIcon icon = new ImageIcon(image);
-                boton.setIcon(icon);
-            } catch (IOException ex) {
-                System.out.println("error al cargar imagen de "+Datos.personajes.get(i).getNombre()+" en disponibles");
+                boton.setIcon(apariencia1);
+   
+   //             System.out.println("error al cargar imagen de "+Datos.personajes.get(i).getNombre()+" en disponibles");
                 
-            }
             boton.addActionListener(al2);
             
             pnlDisponibles.add(boton);
@@ -76,7 +69,6 @@ public class VentanaJuego extends javax.swing.JFrame {
                 contadorColumna = 0;
             }
             contadorColumna += 1;
-            
         }
     }
    
@@ -106,9 +98,6 @@ public class VentanaJuego extends javax.swing.JFrame {
                         //boton.setIcon(new javax.swing.ImageIcon(Datos.ruta+"BaseBloqueada.png"));
                     }
                 }
-                
-                
-
                 boton.addActionListener(al);
                 pnlFondo.add(boton);
             }

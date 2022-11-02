@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -43,7 +44,7 @@ public class Personaje {
     private int Vida;
     private int DañoPorSegundo;
     private String Nombre;
-    private String Apariencia;
+    private ArrayList<ImageIcon> Apariencia;
     private Tipo TipoDeAtaque;
     private int Nivel;
     private int Campos;
@@ -53,7 +54,7 @@ public class Personaje {
         return this.TipoDeAtaque;
     }
 
-    public Personaje(int Vida, int DañoPorSegundo, String Nombre, String Apariencia, Tipo TipoDeAtaque, int NivelAparicion) {
+    public Personaje(int Vida, int DañoPorSegundo, String Nombre, ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque, int NivelAparicion) {
         this.Vida = Vida;
         this.DañoPorSegundo = DañoPorSegundo;
         this.Nombre = Nombre;
@@ -90,11 +91,11 @@ public class Personaje {
         this.Nombre = Nombre;
     }
 
-    public String getApariencia() {
+    public ArrayList<ImageIcon> getApariencia() {
         return Apariencia;
     }
 
-    public void setApariencia(String Apariencia) {
+    public void setApariencia(ArrayList<ImageIcon> Apariencia) {
         this.Apariencia = Apariencia;
     }
 

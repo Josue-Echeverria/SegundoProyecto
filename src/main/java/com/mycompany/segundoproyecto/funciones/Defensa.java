@@ -4,13 +4,16 @@
  */
 package com.mycompany.segundoproyecto.funciones;
 
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author jecheverria
  */
 public class Defensa extends Personaje{
     
-    public Defensa(String Nombre, int Vida, int DañoPorSegundo, int NivelAparicion, String Apariencia, Tipo TipoDeAtaque)  {
+    public Defensa(String Nombre, int Vida, int DañoPorSegundo, int NivelAparicion,  ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque)  {
         super(Vida, DañoPorSegundo, Nombre, Apariencia, TipoDeAtaque, NivelAparicion);
     }
     
