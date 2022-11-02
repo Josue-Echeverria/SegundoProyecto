@@ -40,6 +40,7 @@ public class ThreadCaminar extends Thread {
     private Boolean borde = true;
     public int coordsanterior[];
     
+    
 
 
     public ThreadCaminar(Personaje personaje, int iinicio, int jinicio, int ifinal, int jfinal) {
@@ -51,7 +52,7 @@ public class ThreadCaminar extends Thread {
         quienResta = Cordenada.x;
         this.personaje = personaje;
         
-        Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Japón.png"));
+        Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Defensa3.png"));
         
         
         
@@ -106,6 +107,7 @@ public class ThreadCaminar extends Thread {
                     if (Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString().equals(null) ){
                         System.out.println("Es la base");
                     }else{
+                        System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());
                         System.out.println("no es la base");
                         pausa();
                         /*System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());

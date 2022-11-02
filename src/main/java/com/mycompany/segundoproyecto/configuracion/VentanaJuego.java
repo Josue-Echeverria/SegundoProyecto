@@ -40,7 +40,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         creaMatrixPersonaje();
         Personaje prueba = Datos.personajes.get(0);
 
-        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0, 16, 10);
+        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0, Datos.coordsPilar[0],  Datos.coordsPilar[1]);
         tr.start();
         
         

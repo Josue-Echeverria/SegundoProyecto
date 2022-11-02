@@ -34,7 +34,8 @@ public class Datos {
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-    static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
+    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+    static public int[] coordsPilar;
     public Datos() {
         accionMouse = EstadoHaciendoMouse.NADA;
         personajeCargando = null;
@@ -42,6 +43,10 @@ public class Datos {
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
         defensasDisponibles = new ArrayList<>();
+        coordsPilar = new int[2];
+        coordsPilar[0] = 5;
+        coordsPilar[1] = 8;
+        
         try {
             personajes =  new Modelo().read_personajes();
             defensas =  new Modelo().read_Defensas();
