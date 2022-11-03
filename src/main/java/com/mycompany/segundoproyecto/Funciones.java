@@ -9,15 +9,18 @@ import static com.mycompany.segundoproyecto.Datos.coordsPilar;
 import com.mycompany.segundoproyecto.configuracion.VentanaInformacion;
 import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+import com.mycompany.segundoproyecto.funciones.Zombie;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -79,4 +82,51 @@ public class Funciones {
     }
 
 
+    static public void generaJuego(){
+        System.out.println("***");
+        System.out.println(Datos.zombies.size());
+        System.out.println("***");
+        int menor = 1000;
+        for (Zombie zomby : Datos.zombies) {
+            if(zomby.getCampos()< menor){
+                menor = zomby.getAlcance();
+                
+            }
+                
+            
+        }
+        int copiacampos = Datos.campos;
+        while(copiacampos > 0){
+            Random r = new Random();
+            int valorDado = r.nextInt(Datos.zombies.size());
+            Random r2 = new Random();
+            int valorDado2 = r2.nextInt(104);
+            System.out.println("############");
+            System.out.println(valorDado);
+            System.out.println(Datos.zombies.get(valorDado).getAlcance());
+            System.out.println(copiacampos);
+            System.out.println("############");
+            
+            if(Datos.zombies.get(valorDado).getAlcance()<= copiacampos){
+                
+                copiacampos -= Datos.zombies.get(valorDado).getAlcance();
+                
+                String[] COORDString = Datos.matrizBotonesApareceZombies[valorDado2].getText().split("-");
+                int i = Integer.parseInt(COORDString[1]);
+                int j = Integer.parseInt(COORDString[0]);
+                ThreadCaminar tr = new ThreadCaminar(Datos.zombies.get(valorDado), i,j );
+                tr.start();
+            }
+            if(copiacampos < menor){
+                break;
+                
+            }
+            
+        } 
+        
+            
+        
+        
+    }
 }
+

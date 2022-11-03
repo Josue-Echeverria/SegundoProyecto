@@ -53,7 +53,7 @@ public class ThreadCaminar extends Thread {
         quienResta = Cordenada.x;
         this.personaje = personaje;
         int[] pos1 = {iinicio,jinicio};
-        Datos.zombies.get(0).setPosicion(pos1);
+        personaje.setPosicion(pos1);
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
         

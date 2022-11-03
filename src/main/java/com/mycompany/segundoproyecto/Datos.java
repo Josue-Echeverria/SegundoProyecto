@@ -42,6 +42,7 @@ public class Datos {
     static public ArrayList<Defensa> defensasDisponibles;
     static public ArrayList<Defensa> defensasEnJuego;
     
+    
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
@@ -49,9 +50,13 @@ public class Datos {
     static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
     static public Defensa Pilar;
     static public int[] coordsPilar;
+    static public int campos;
+    static public int nivel;
     public Datos() {
         accionMouse = EstadoHaciendoMouse.NADA;
         personajeCargando = null;
+        nivel = 1;
+        campos = 20;
         matrizBotonesInterfaz = new JButton[27][27];
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];

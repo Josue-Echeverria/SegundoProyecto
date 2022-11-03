@@ -61,9 +61,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         
         //FIN DE LAS PRUEBAS
-        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0);
-
-        tr.start();
+        
         
         
     }
@@ -82,7 +80,12 @@ public class VentanaJuego extends javax.swing.JFrame {
             ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
 
             boton.setIcon(apariencia1);
-
+            System.out.println(Datos.nivel);
+            System.out.println(Datos.defensas.get(i).getNivelAparicion());
+            if (Datos.defensas.get(i).getNivelAparicion()> Datos.nivel){
+                boton.setBackground(Color.red);
+                boton.setEnabled(false);
+            }
 
             boton.addActionListener(al2);
             
@@ -173,6 +176,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         pnlFondo = new javax.swing.JPanel();
         pnlDisponibles = new javax.swing.JPanel();
+        btJugar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -193,15 +197,28 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         pnlDisponibles.setBackground(new java.awt.Color(0, 255, 0));
 
+        btJugar.setText("Jugar");
+        btJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btJugarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
         pnlDisponibles.setLayout(pnlDisponiblesLayout);
         pnlDisponiblesLayout.setHorizontalGroup(
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
+            .addGroup(pnlDisponiblesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btJugar)
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         pnlDisponiblesLayout.setVerticalGroup(
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btJugar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,6 +239,10 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btJugarActionPerformed
+       Funciones.generaJuego();
+    }//GEN-LAST:event_btJugarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +280,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btJugar;
     private javax.swing.JPanel pnlDisponibles;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables
