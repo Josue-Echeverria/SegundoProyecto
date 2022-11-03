@@ -205,6 +205,7 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
     //Retorna las cordenadas mas cercanas al zombie_actual
 
     public int[] calcular_objetivo(Zombie zombie_actual, ArrayList<Defensa> Defensas){
+        
         int[] objetivo = {0,0};
         double distancia = 1000; //Distancia imposible para poder almacenar la primera distancia 
         int x_zombie = zombie_actual.getPosicion()[0];

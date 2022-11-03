@@ -52,6 +52,8 @@ public class ThreadCaminar extends Thread {
         this.jinicio = jinicio;
         quienResta = Cordenada.x;
         this.personaje = personaje;
+        int[] pos1 = {iinicio,jinicio};
+        Datos.zombies.get(0).setPosicion(pos1);
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
         
@@ -72,7 +74,7 @@ public class ThreadCaminar extends Thread {
             try {
                 //PRUEBAS(BORRARME DEL ARCHIVO)
                 
-                int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensas);
+                int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensasEnJuego);
                 jfinal = objetivo[0];
                 ifinal = objetivo[1];
                 

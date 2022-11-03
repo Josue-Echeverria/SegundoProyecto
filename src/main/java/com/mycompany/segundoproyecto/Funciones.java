@@ -7,6 +7,7 @@ package com.mycompany.segundoproyecto;
 
 import static com.mycompany.segundoproyecto.Datos.coordsPilar;
 import com.mycompany.segundoproyecto.configuracion.VentanaInformacion;
+import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Personaje;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -62,6 +63,11 @@ public class Funciones {
                 Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
                 ImageIcon icon = new ImageIcon(image);*/
                 Datos.matrizBotonesInterfaz[i][j].setIcon(Datos.defensas.get(indice).getApariencia().get(0));
+                Defensa nueva = new Defensa(Datos.defensas.get(indice).getNombre(),Datos.defensas.get(indice).getVida(),Datos.defensas.get(indice).getDañoPorSegundo(),Datos.defensas.get(indice).getNivelAparicion(),Datos.defensas.get(indice).getAlcance(),Datos.defensas.get(indice).getApariencia(),Datos.defensas.get(indice).getTipoDeAtaque());
+                
+                int[] pos0 = {i,j};
+                nueva.setPosicion(pos0);
+                Datos.defensasEnJuego.add(nueva);
                 
                 Datos.matrizPersonajes[i][j] = Datos.defensas.get(indice);
                 Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;

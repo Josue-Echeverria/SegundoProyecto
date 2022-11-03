@@ -7,6 +7,7 @@ package com.mycompany.segundoproyecto.configuracion;
 import com.mycompany.segundoproyecto.Datos;
 import com.mycompany.segundoproyecto.Funciones;
 import com.mycompany.segundoproyecto.ThreadCaminar;
+import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Personaje;
 import com.mycompany.segundoproyecto.funciones.Zombie;
 import java.awt.Color;
@@ -48,10 +49,16 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         int[] pos = {2,5};
         int[] pos0 = {3,7};
-        int[] pos1 = {0,0};
-        Datos.defensas.get(1).setPosicion(pos);
-        Datos.defensas.get(0).setPosicion(pos0);
-        Datos.zombies.get(0).setPosicion(pos1);
+        
+        Defensa nueva = new Defensa(Datos.defensas.get(0).getNombre(),Datos.defensas.get(0).getVida(),Datos.defensas.get(0).getDañoPorSegundo(),Datos.defensas.get(0).getNivelAparicion(),Datos.defensas.get(0).getAlcance(),Datos.defensas.get(0).getApariencia(),Datos.defensas.get(0).getTipoDeAtaque());
+        Defensa nueva2 = new Defensa(Datos.defensas.get(1).getNombre(),Datos.defensas.get(1).getVida(),Datos.defensas.get(1).getDañoPorSegundo(),Datos.defensas.get(1).getNivelAparicion(),Datos.defensas.get(1).getAlcance(),Datos.defensas.get(1).getApariencia(),Datos.defensas.get(1).getTipoDeAtaque());
+        
+        Datos.defensasEnJuego.add(nueva);
+        Datos.defensasEnJuego.add(nueva2);
+        
+        Datos.defensasEnJuego.get(1).setPosicion(pos);
+        Datos.defensasEnJuego.get(0).setPosicion(pos0);
+        
         
         //FIN DE LAS PRUEBAS
         ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0);

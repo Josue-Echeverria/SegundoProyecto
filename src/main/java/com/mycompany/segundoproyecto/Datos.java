@@ -40,6 +40,8 @@ public class Datos {
     static public ArrayList<Personaje> personajes;
     static public ArrayList<Defensa> defensas;
     static public ArrayList<Defensa> defensasDisponibles;
+    static public ArrayList<Defensa> defensasEnJuego;
+    
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
@@ -54,6 +56,7 @@ public class Datos {
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
         defensasDisponibles = new ArrayList<>();
+        defensasEnJuego = new ArrayList<>();
        
         
         
