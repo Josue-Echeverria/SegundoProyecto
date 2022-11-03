@@ -31,6 +31,7 @@ public class Datos {
     
     static public enum EstadoHaciendoMouse{
     CARGANDOPERSONAJE,
+    MOVIENDOPILAR,
     NADA;
     }
     static public JButton[][] matrizBotonesInterfaz;
@@ -80,11 +81,18 @@ public class Datos {
             images.add(new ImageIcon(image));
             Pilar= new Defensa("Pilar",1,0,1,0,images,Personaje.tipoPilar);
             coordsPilar = new int[2];
+<<<<<<< Updated upstream
             coordsPilar[0] = j;
             coordsPilar[1] = i;
             matrizBotonesInterfaz[coordsPilar[1]][coordsPilar[0]].setIcon(Pilar.getApariencia().get(0));
             matrizPersonajes[coordsPilar[1]][coordsPilar[0]] = Pilar;
             
+=======
+            coordsPilar[0] = i;
+            coordsPilar[1] = j;
+            matrizBotonesInterfaz[coordsPilar[0]][coordsPilar[1]].setIcon(Pilar.getApariencia().get(0));
+            matrizPersonajes[coordsPilar[0]][coordsPilar[1]] = Pilar;
+>>>>>>> Stashed changes
         } catch (IOException ex) {
             System.out.println("no cargo la imagen del pilar");
         }
