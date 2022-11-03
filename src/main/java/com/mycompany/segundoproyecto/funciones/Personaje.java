@@ -33,6 +33,34 @@ enum Tipo{
         this.campos = 0;
     }
 
+    public static Tipo getAEREO() {
+        return AEREO;
+    }
+
+    public static Tipo getCONTACTO() {
+        return CONTACTO;
+    }
+
+    public static Tipo getMEDIOALCANCE() {
+        return MEDIOALCANCE;
+    }
+
+    public static Tipo getIMPACTO() {
+        return IMPACTO;
+    }
+
+    public static Tipo getBLOQUE() {
+        return BLOQUE;
+    }
+
+    public static Tipo getATAQUEMULTIPLE() {
+        return ATAQUEMULTIPLE;
+    }
+
+    public int getCampos() {
+        return campos;
+    }
+
     private Tipo(int campos) {
         this.campos = campos;
     }
@@ -48,21 +76,28 @@ public class Personaje {
     private ArrayList<ImageIcon> Apariencia;
     private Tipo TipoDeAtaque;
     private int Nivel;
+    private int Alcance;
     private int Campos;
     private int NivelAparicion;
+    private int[] posicion;
+    
 
     public Tipo getTipoDeAtaque(){
         return this.TipoDeAtaque;
     }
 
-    public Personaje(int Vida, int DañoPorSegundo, String Nombre, ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque, int NivelAparicion) {
+    public Personaje(int Vida, int DañoPorSegundo, String Nombre,
+            ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque, 
+            int NivelAparicion, int alcance) {
         this.Vida = Vida;
         this.DañoPorSegundo = DañoPorSegundo;
         this.Nombre = Nombre;
+        this.Alcance = alcance;
         this.Apariencia = Apariencia;
         this.TipoDeAtaque = TipoDeAtaque;
         this.NivelAparicion = NivelAparicion;
     }
+    
     public String getTipoDeAtaqueString(){
         if(this.TipoDeAtaque == Tipo.AEREO)
             return "Aereo";
@@ -77,6 +112,10 @@ public class Personaje {
         else
             return "Medio alcance";
         
+    }
+
+    public int getAlcance() {
+        return Alcance;
     }
     
     public void setTipoDeAtaque(Tipo tipodeataque){
@@ -140,9 +179,20 @@ public class Personaje {
     }
     
     public void tostring(){
-        System.out.println("Hola soy "+ this.Nombre + " y ataco " +this.TipoDeAtaque);
+        System.out.println("Hola soy "+ this.Nombre +"\n" +
+                " Mi ataque es de tipo " +this.TipoDeAtaque+"\n"+
+                "Tengo "+ this.Vida+" de vida"+"\n"+
+                "Mi daño por segundo es de: "+this.DañoPorSegundo+"\n"+
+                "Aparezco en el nivel: "+this.NivelAparicion+"\n"+
+                "Mis ataques tienen un alacance de: "+this.Alcance+"\n");
+    }
+
+    public int[] getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int[] posicion) {
+        this.posicion = posicion;
     }
     
-
-
 }

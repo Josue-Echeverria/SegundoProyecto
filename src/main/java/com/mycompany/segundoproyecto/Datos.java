@@ -28,6 +28,7 @@ import javax.swing.JButton;
 
 
 public class Datos {
+    
     static public enum EstadoHaciendoMouse{
     CARGANDOPERSONAJE,
     NADA;
@@ -41,7 +42,7 @@ public class Datos {
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+    static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
     static public Defensa Pilar;
     static public int[] coordsPilar;
     public Datos() {
@@ -58,12 +59,15 @@ public class Datos {
         //***************
         
         
+        
         try {
             personajes =  new Modelo().read_personajes();
-            defensas =  new Modelo().read_Defensas();
             zombies =  new Modelo().read_Zombies();
+            defensas =  new Modelo().read_Defensas();
         } catch (IOException ex) {
-            System.out.println("Error");
+           
+           System.out.println("Error");
+         Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void ponePilar(int j,int i){
@@ -74,12 +78,13 @@ public class Datos {
             bufferedImage = ImageIO.read(new File(ruta+"Defensa6.png"));
             Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
             images.add(new ImageIcon(image));
-            Pilar= new Defensa("Pilar",0,0,1,images,Personaje.tipoPilar);
+            Pilar= new Defensa("Pilar",1,0,1,0,images,Personaje.tipoPilar);
             coordsPilar = new int[2];
             coordsPilar[0] = j;
             coordsPilar[1] = i;
             matrizBotonesInterfaz[coordsPilar[1]][coordsPilar[0]].setIcon(Pilar.getApariencia().get(0));
             matrizPersonajes[coordsPilar[1]][coordsPilar[0]] = Pilar;
+            
         } catch (IOException ex) {
             System.out.println("no cargo la imagen del pilar");
         }

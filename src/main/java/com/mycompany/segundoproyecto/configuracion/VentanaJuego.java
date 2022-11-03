@@ -8,6 +8,7 @@ import com.mycompany.segundoproyecto.Datos;
 import com.mycompany.segundoproyecto.Funciones;
 import com.mycompany.segundoproyecto.ThreadCaminar;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+import com.mycompany.segundoproyecto.funciones.Zombie;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -38,10 +39,21 @@ public class VentanaJuego extends javax.swing.JFrame {
         initComponents();
         creaMatrizJugable();
         creaMatrixPersonaje();
-        Datos.ponePilar(5,5);
-        Personaje prueba = Datos.personajes.get(0);
-
-        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0, Datos.coordsPilar[0],  Datos.coordsPilar[1]);
+        Datos.ponePilar(10,10);
+        
+        //PRUEBAS(BORRARME DEL ARCHIVO)
+        
+        Zombie prueba = Datos.zombies.get(0);
+        
+        int[] pos = {2,5};
+        int[] pos0 = {3,7};
+        int[] pos1 = {0,0};
+        Datos.defensas.get(1).setPosicion(pos);
+        Datos.defensas.get(0).setPosicion(pos0);
+        Datos.zombies.get(0).setPosicion(pos1);
+        
+        //FIN DE LAS PRUEBAS
+        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0);
         tr.start();
         
         
@@ -56,15 +68,11 @@ public class VentanaJuego extends javax.swing.JFrame {
             boton.setLocation(contadorColumna*tamañobotones, contadorfila*tamañobotones);
 
             boton.setText(Datos.defensas.get(i).getApariencia()+ "%"+i);
-            
-            //try {
-                
-                ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
-                
-                boton.setIcon(apariencia1);
-   
-   //             System.out.println("error al cargar imagen de "+Datos.personajes.get(i).getNombre()+" en disponibles");
-                
+
+            ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
+
+            boton.setIcon(apariencia1);
+
             boton.addActionListener(al2);
             
             pnlDisponibles.add(boton);
@@ -136,13 +144,11 @@ public class VentanaJuego extends javax.swing.JFrame {
                     if (e.getSource() == Datos.matrizBotonesInterfaz[j][i]){
                         Funciones.FuncionBotones(j, i);
                         break;
-                    }
-                        
+                    }                    
                 }
             }
-            
         }
-      };
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.

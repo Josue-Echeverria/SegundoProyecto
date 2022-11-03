@@ -37,13 +37,13 @@ public class Modelo {
             String[] atributos = personaje.split("/");
             
             Tipo tipo_personaje = null;
-            if (atributos.length == 8){
+            if (atributos.length == 9){
                 
                 ArrayList<ImageIcon> images = new ArrayList();
-                BufferedImage bufferedImage= ImageIO.read(new File(atributos[6]));
+                BufferedImage bufferedImage= ImageIO.read(new File(atributos[7]));
                 Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
                 images.add(new ImageIcon(image));
-                bufferedImage= ImageIO.read(new File(atributos[7]));;
+                bufferedImage= ImageIO.read(new File(atributos[8]));;
                 image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 
                 if (atributos[0].equals("D")){
@@ -68,9 +68,9 @@ public class Modelo {
                                 break;
                     }
                     personajes.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),images ,tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),Integer.parseInt(atributos[6]),images ,tipo_personaje));
                     defensas.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),Integer.parseInt(atributos[6]),images,tipo_personaje));
                 }
 
                 if (atributos[0].equals("Z")){
@@ -89,14 +89,17 @@ public class Modelo {
                             break;
                     }
                     personajes.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),Integer.parseInt(atributos[6]),images,tipo_personaje));
                     zombies.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
+                        ,Integer.parseInt(atributos[5]) ,Integer.parseInt(atributos[6]),images,tipo_personaje));
                 }
             }
             else{}
         }
         return personajes;
+    }
+
+    public Modelo() {
     }
 
 
@@ -112,12 +115,12 @@ public ArrayList<Defensa> read_Defensas() throws FileNotFoundException, IOExcept
             
             
             Tipo tipo_personaje = null;
-            if (atributos.length == 8){
+            if (atributos.length == 9){
                 ArrayList<ImageIcon> images = new ArrayList();  
-                BufferedImage bufferedImage= ImageIO.read(new File(atributos[6]));;
+                BufferedImage bufferedImage= ImageIO.read(new File(atributos[7]));;
                 Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
                 images.add(new ImageIcon(image));
-                bufferedImage= ImageIO.read(new File(atributos[7]));;
+                bufferedImage= ImageIO.read(new File(atributos[8]));;
                 image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
             
                 if (atributos[0].equals("D")){
@@ -143,7 +146,7 @@ public ArrayList<Defensa> read_Defensas() throws FileNotFoundException, IOExcept
                     }
                     
                     defensas.add(new Defensa(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),Integer.parseInt(atributos[6]),images,tipo_personaje));
                 }
             }
             else{}
@@ -163,13 +166,13 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
             String[] atributos = personaje.split("/");
             
             Tipo tipo_personaje = null;
-            if (atributos.length == 8){
+            if (atributos.length == 9){
 
                 ArrayList<ImageIcon> images = new ArrayList();  
-                BufferedImage bufferedImage= ImageIO.read(new File(atributos[6]));;
+                BufferedImage bufferedImage= ImageIO.read(new File(atributos[7]));;
                 Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
                 images.add(new ImageIcon(image));
-                bufferedImage= ImageIO.read(new File(atributos[7]));;
+                bufferedImage= ImageIO.read(new File(atributos[8]));;
                 image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 
                 if (atributos[0].equals("Z")){
@@ -189,7 +192,7 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
                     }
 
                     zombies.add(new Zombie(atributos[2],Integer.parseInt(atributos[3]),Integer.parseInt(atributos[4])
-                        ,Integer.parseInt(atributos[5]),images,tipo_personaje));
+                        ,Integer.parseInt(atributos[5]),Integer.parseInt(atributos[6]),images,tipo_personaje));
                 }
             }
             else{}
@@ -197,4 +200,31 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
         
         return zombies;
     }
+    //Calcula averigua las cordenadas de la defensa mas cercana usando teorema de pitagoras
+    //Retorna las cordenadas mas cercanas al zombie_actual
+
+    public int[] calcular_objetivo(Zombie zombie_actual, ArrayList<Defensa> Defensas){
+        int[] objetivo = {0,0};
+        double distancia = 1000; //Distancia imposible para poder almacenar la primera distancia 
+        int x_zombie = zombie_actual.getPosicion()[0];
+        int y_zombie = zombie_actual.getPosicion()[1];
+        for (int i = 0; i < Defensas.size(); i++){ //Recorre todas las defensas
+            int[] cordenadas_defensa = Defensas.get(i).getPosicion();
+            int x_defensa= cordenadas_defensa[0];
+            int y_defensa= cordenadas_defensa[1];
+            int desplazamiento_horizontal = x_zombie - x_defensa;
+            int desplazamiento_vertical = y_zombie - y_defensa;
+            double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+            if (pitagoras <= distancia){
+                distancia = pitagoras;
+                objetivo = cordenadas_defensa;
+            }
+        }
+        return objetivo;
+    }   
+    public double calcular_distancia(int a, int b){
+        double distancia = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
+        return distancia;
+    }
+    
 }

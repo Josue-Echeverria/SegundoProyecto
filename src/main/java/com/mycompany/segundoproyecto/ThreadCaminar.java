@@ -5,7 +5,9 @@
  */
 package com.mycompany.segundoproyecto;
 
+import com.mycompany.segundoproyecto.funciones.Modelo;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+import com.mycompany.segundoproyecto.funciones.Zombie;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -43,19 +45,23 @@ public class ThreadCaminar extends Thread {
     
 
 
-    public ThreadCaminar(Personaje personaje, int iinicio, int jinicio, int ifinal, int jfinal) {
+    public ThreadCaminar(Personaje personaje, int iinicio, int jinicio) {
         this.imagen = personaje.getApariencia().get(0);
+        
         this.iinicio = iinicio;
         this.jinicio = jinicio;
-        this.ifinal = ifinal;
-        this.jfinal = jfinal;
         quienResta = Cordenada.x;
         this.personaje = personaje;
         
-        //Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(new javax.swing.ImageIcon(Datos.ruta+"Defensa3.png"));
+        //PRUEBAS(BORRARME DEL ARCHIVO)
         
+        Datos.matrizBotonesInterfaz[2][5].setIcon(Datos.defensas.get(1).getApariencia().get(0));
+        Datos.matrizPersonajes[2][5] = Datos.defensas.get(1);
         
-        
+        Datos.matrizBotonesInterfaz[3][7].setIcon(Datos.defensas.get(0).getApariencia().get(0));
+        Datos.matrizPersonajes[3][7] = Datos.defensas.get(0);
+
+        //FIN DE LAS PRUEBAS        
     }
     
     
@@ -64,16 +70,27 @@ public class ThreadCaminar extends Thread {
     public void run(){
         while (isRunning){
             try {
-                // Definir nuevas dimensiones
+                //PRUEBAS(BORRARME DEL ARCHIVO)
                 
+                int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensas);
+                jfinal = objetivo[0];
+                ifinal = objetivo[1];
+                
+                //FIN DE LAS PRUEBAS
                 
                 coordsanterior = new int[]{jinicio,iinicio};
                 Icon icono = Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon();
                 Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(imagen);
                 String coordInicio = ""+ iinicio+"-"+jinicio;
                 sleep(1000);
-                if (iinicio == ifinal && jinicio == jfinal){
-                    System.out.println("********");
+                
+                //PRUEBA
+                personaje.tostring();
+                int a = iinicio - ifinal;
+                int b = jinicio - jfinal;
+                //
+                if (new Modelo().calcular_distancia(a,b) <= personaje.getAlcance()){
+                    System.out.println("Llegue a mi objetivo "+ new Modelo().calcular_distancia(a,b));
                     System.out.println(coordInicio);
                     finish();
                 }else if(quienResta == Cordenada.x){
@@ -97,12 +114,8 @@ public class ThreadCaminar extends Thread {
                         }else{
                             iinicio += 1;
                     }
-                    quienResta = Cordenada.x;
-                          
+                    quienResta = Cordenada.x;         
                 }
-                
-                
-                
                 try {
                     if (Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString().equals(null) ){
                         System.out.println("Es la base");

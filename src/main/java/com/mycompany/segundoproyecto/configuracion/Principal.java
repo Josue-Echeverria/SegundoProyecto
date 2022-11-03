@@ -473,16 +473,6 @@ public class Principal extends javax.swing.JFrame {
             else
                 personaje_str += txf_nombre.getText()+ "/";
             
-            //Daño del personaje
-            try{
-                Integer.parseInt(txf_daño.getText());
-                personaje_str += txf_daño.getText()+ "/";
-            }
-            catch (Exception e){
-                System.out.println("Casilla de daño invalida");
-                errores = true;
-            }
-            
             //Vida del personaje
             try{
                 Integer.parseInt(txf_vida.getText());
@@ -493,9 +483,31 @@ public class Principal extends javax.swing.JFrame {
                 System.out.println("Casilla de vida invalida");
             }
             
+            //Daño del personaje
+            try{
+                Integer.parseInt(txf_daño.getText());
+                personaje_str += txf_daño.getText()+ "/";
+            }
+            catch (Exception e){
+                System.out.println("Casilla de daño invalida");
+                errores = true;
+            }
+            
+
+            
             //Nivel de aparicion 
             try{               
                 Integer.parseInt(txf_nvlAparicion.getText());
+                personaje_str += txf_nvlAparicion.getText()+"/";
+            }
+            catch (Exception e){
+                errores = true;        
+                System.out.println("Casilla de nivel de aparicion invalida");
+            }
+            
+            //Alcance del perosnaje
+            try{               
+                Integer.parseInt(txf_alcance.getText());
                 personaje_str += txf_nvlAparicion.getText()+"/";
             }
             catch (Exception e){
