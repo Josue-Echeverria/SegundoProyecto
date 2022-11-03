@@ -39,7 +39,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         initComponents();
         creaMatrizJugable();
         creaMatrixPersonaje();
-<<<<<<< Updated upstream
+
         Datos.ponePilar(10,10);
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
@@ -55,12 +55,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         //FIN DE LAS PRUEBAS
         ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0);
-=======
-        Datos.ponePilar(10,5);
-        Personaje prueba = Datos.personajes.get(0);
 
-        ThreadCaminar tr = new ThreadCaminar(prueba, 0, 0, Datos.coordsPilar[1],  Datos.coordsPilar[0]);
->>>>>>> Stashed changes
         tr.start();
         
         
@@ -74,25 +69,14 @@ public class VentanaJuego extends javax.swing.JFrame {
             boton.setSize(tamañobotones,tamañobotones);
             boton.setLocation(contadorColumna*tamañobotones, contadorfila*tamañobotones);
 
-<<<<<<< Updated upstream
+
             boton.setText(Datos.defensas.get(i).getApariencia()+ "%"+i);
 
             ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
 
             boton.setIcon(apariencia1);
 
-=======
-            boton.setText(Datos.defensas.get(i).getApariencia().get(0)+ "%"+i);
-            
-            //try {
-                
-                ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
-                
-                boton.setIcon(apariencia1);
-   
-   //             System.out.println("error al cargar imagen de "+Datos.personajes.get(i).getNombre()+" en disponibles");
-                
->>>>>>> Stashed changes
+
             boton.addActionListener(al2);
             
             pnlDisponibles.add(boton);
