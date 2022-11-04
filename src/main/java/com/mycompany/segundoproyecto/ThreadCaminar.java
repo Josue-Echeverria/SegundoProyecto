@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -57,11 +58,11 @@ public class ThreadCaminar extends Thread {
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
         
-        Datos.matrizBotonesInterfaz[2][5].setIcon(Datos.defensas.get(1).getApariencia().get(0));
-        Datos.matrizPersonajes[2][5] = Datos.defensas.get(1);
+        Datos.matrizBotonesInterfaz[2][5].setIcon(Datos.defensasEnJuego.get(1).getApariencia().get(0));
+        Datos.matrizPersonajes[2][5] = Datos.defensasEnJuego.get(1);
         
-        Datos.matrizBotonesInterfaz[3][7].setIcon(Datos.defensas.get(0).getApariencia().get(0));
-        Datos.matrizPersonajes[3][7] = Datos.defensas.get(0);
+        Datos.matrizBotonesInterfaz[3][7].setIcon(Datos.defensasEnJuego.get(0).getApariencia().get(0));
+        Datos.matrizPersonajes[3][7] = Datos.defensasEnJuego.get(0);
 
         //FIN DE LAS PRUEBAS        
     }
@@ -87,14 +88,14 @@ public class ThreadCaminar extends Thread {
                 sleep(1000);
                 
                 //PRUEBA
-                personaje.tostring();
+                //personaje.tostring();
                 int a = iinicio - ifinal;
                 int b = jinicio - jfinal;
                 //
                 if (new Modelo().calcular_distancia(a,b) <= personaje.getAlcance()){
-                    System.out.println("Llegue a mi objetivo "+ new Modelo().calcular_distancia(a,b));
-                    System.out.println(coordInicio);
-                    finish();
+                    //System.out.println("Llegue a mi objetivo "+ new Modelo().calcular_distancia(a,b));
+                    //System.out.println(coordInicio);
+                    pausa();
                 }else if(quienResta == Cordenada.x){
                     if(jinicio == jfinal ){
                         quienResta = Cordenada.y;
@@ -118,19 +119,19 @@ public class ThreadCaminar extends Thread {
                     }
                     quienResta = Cordenada.x;         
                 }
-                try {
+                /*try {
                     if (Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString().equals(null) ){
-                        System.out.println("Es la base");
+                        //System.out.println("Es la base");
                     }else{
-                        System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());
-                        System.out.println("no es la base");
+                        //System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());
+                        //System.out.println("no es la base");
                         pausa();
                         /*System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());
-                        System.out.println(Datos.ruta+"Base.png");*/
+                        System.out.println(Datos.ruta+"Base.png");
                     }
                 } catch (Exception e) {
                    
-                }
+                }*/
                 
                 
                 
@@ -142,15 +143,55 @@ public class ThreadCaminar extends Thread {
                 try {
                     sleep(500);
                     System.out.println("Atacando");
-                    Datos.matrizPersonajes[jinicio][iinicio].setVida(Datos.matrizPersonajes[jinicio][iinicio].getVida()-Datos.matrizPersonajes[jinicio][iinicio].getDañoPorSegundo());
-                    if(Datos.matrizPersonajes[jinicio][iinicio].getVida() <= 0){
+                    System.out.println(""+jfinal+"-"+ifinal);
+                    //Datos.matrizPersonajes[jinicio][iinicio].setVida(Datos.matrizPersonajes[jinicio][iinicio].getVida()-Datos.matrizPersonajes[jinicio][iinicio].getDañoPorSegundo());
+                    if (Datos.matrizPersonajes[jfinal][ifinal] != null){
+                            Datos.matrizPersonajes[jfinal][ifinal].setVida(Datos.matrizPersonajes[jfinal][ifinal].getVida()-Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]].getDañoPorSegundo());
+                    
+                            if(Datos.matrizPersonajes[jfinal][ifinal].getVida() <= 0){
+                                
+                                
+                                Personaje eliminado = Datos.matrizPersonajes[jfinal][ifinal];
+                                System.out.println("****");
+                                System.out.println(Datos.defensasEnJuego.remove(Datos.matrizPersonajes[jfinal][ifinal]));
+                                System.out.println("****");
+                                Datos.matrizPersonajes[jfinal][ifinal] = null;
+                                Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(null);
+                                
+                                if(eliminado == Datos.Pilar){
+                                    System.out.println("Perdiste");
+                                    Datos.labelResultado.setText("Perdiste");
+                                    for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
+                                        ThreadZomby.finish();
+                                        
+                                        
+                                        
+                                    }
+                                    
+                                    Datos.ThreadZombies.clear();
+                                    finish();
+                                }
+                                pausa();
+                                if(!Datos.defensasEnJuego.isEmpty()){
+                                    int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensasEnJuego);
+                                    jfinal = objetivo[0];
+                                    ifinal = objetivo[1];
+                                }else{
+                                    finish();
+                                }
+                                    
+                                
+                                break;
+                            }
+                    }else{
                         pausa();
                     }
+                    
                 } catch (InterruptedException ex) {
+                    
                 }
             }
-               Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(null);
-               Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]] = (null);
+               
                 //String hola = Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon();
                 /*if(borde){
                     int contador = 0;
@@ -166,8 +207,18 @@ public class ThreadCaminar extends Thread {
                         }
                     }
                 }*/
-            Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(new javax.swing.ImageIcon(Datos.ruta+imagen));
-            Datos.matrizPersonajes[jinicio][iinicio] = personaje;
+            if (Datos.ZombiesEnJuego.contains(Datos.matrizPersonajes[jinicio][iinicio])){
+                jinicio = coordsanterior[0];
+                iinicio = coordsanterior[1];
+            }else{
+                Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(null);
+                Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]] = (null);
+                Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(new javax.swing.ImageIcon(Datos.ruta+imagen));
+                Datos.matrizPersonajes[jinicio][iinicio] = personaje;
+            }
+        
+                
+            
             
         }
         

@@ -5,6 +5,7 @@
 package com.mycompany.segundoproyecto.configuracion;
 
 import com.mycompany.segundoproyecto.Datos;
+import static com.mycompany.segundoproyecto.Datos.ponePilar;
 import com.mycompany.segundoproyecto.Funciones;
 import com.mycompany.segundoproyecto.ThreadCaminar;
 import com.mycompany.segundoproyecto.funciones.Defensa;
@@ -40,8 +41,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         initComponents();
         creaMatrizJugable();
         creaMatrixPersonaje();
+        Datos.labelResultado = lbPerdiste;
+        
 
-        Datos.ponePilar(10,10);
+        
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
         
@@ -61,6 +64,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         
         //FIN DE LAS PRUEBAS
+        ponePilar(10,10);
         
         
         
@@ -138,11 +142,14 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(!Datos.jugando){
+                JButton boton = (JButton) e.getSource();
+                Datos.accionMouse = Datos.EstadoHaciendoMouse.CARGANDOPERSONAJE;
+                Datos.personajeCargando = boton.getText();
+                System.out.println(boton.getText());
+            }
             
-            JButton boton = (JButton) e.getSource();
-            Datos.accionMouse = Datos.EstadoHaciendoMouse.CARGANDOPERSONAJE;
-            Datos.personajeCargando = boton.getText();
-            System.out.println(boton.getText());
+            
             
         }
       };
@@ -153,15 +160,19 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (int i = 0; i < 27; i++) {
-                for (int j = 0; j < 27; j++) {
-                    
-                    if (e.getSource() == Datos.matrizBotonesInterfaz[j][i]){
-                        Funciones.FuncionBotones(j, i);
-                        break;
-                    }                    
+            if(!Datos.jugando){
+                for (int i = 0; i < 27; i++) {
+                    for (int j = 0; j < 27; j++) {
+
+                        if (e.getSource() == Datos.matrizBotonesInterfaz[j][i]){
+
+                            Funciones.FuncionBotones(j, i);
+                            break;
+                        }                    
+                    }
                 }
             }
+            
         }
     };
 
@@ -177,6 +188,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         pnlFondo = new javax.swing.JPanel();
         pnlDisponibles = new javax.swing.JPanel();
         btJugar = new javax.swing.JButton();
+        lbPerdiste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -204,19 +216,26 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
         });
 
+        lbPerdiste.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
         pnlDisponibles.setLayout(pnlDisponiblesLayout);
         pnlDisponiblesLayout.setHorizontalGroup(
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDisponiblesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btJugar)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addGroup(pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPerdiste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlDisponiblesLayout.createSequentialGroup()
+                        .addComponent(btJugar)
+                        .addContainerGap(165, Short.MAX_VALUE))))
         );
         pnlDisponiblesLayout.setVerticalGroup(
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96)
                 .addComponent(btJugar)
                 .addContainerGap())
         );
@@ -281,6 +300,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btJugar;
+    private javax.swing.JLabel lbPerdiste;
     private javax.swing.JPanel pnlDisponibles;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables

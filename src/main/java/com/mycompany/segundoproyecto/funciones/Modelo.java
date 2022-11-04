@@ -38,7 +38,7 @@ public class Modelo {
             
             Tipo tipo_personaje = null;
             if (atributos.length == 9){
-                System.out.println(atributos[7]);
+                //System.out.println(atributos[7]);
                 
                 ArrayList<ImageIcon> images = new ArrayList();
                 BufferedImage bufferedImage= ImageIO.read(new File(atributos[7]));

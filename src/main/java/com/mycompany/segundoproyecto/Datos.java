@@ -41,8 +41,10 @@ public class Datos {
     static public ArrayList<Defensa> defensas;
     static public ArrayList<Defensa> defensasDisponibles;
     static public ArrayList<Defensa> defensasEnJuego;
-    
-    
+    static public ArrayList<Zombie> ZombiesEnJuego;
+    static public boolean jugando;
+    static public ArrayList<ThreadCaminar> ThreadZombies;
+    static public javax.swing.JLabel labelResultado;
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
@@ -56,12 +58,16 @@ public class Datos {
         accionMouse = EstadoHaciendoMouse.NADA;
         personajeCargando = null;
         nivel = 1;
+        jugando = false;
         campos = 20;
         matrizBotonesInterfaz = new JButton[27][27];
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
         defensasDisponibles = new ArrayList<>();
         defensasEnJuego = new ArrayList<>();
+        ZombiesEnJuego = new ArrayList<>();
+        ThreadZombies = new ArrayList<>();
+        
        
         
         
@@ -93,6 +99,11 @@ public class Datos {
 
             coordsPilar[0] = i;
             coordsPilar[1] = j;
+            int[] pos = {j,i};
+            Pilar.setPosicion(pos);
+            defensasEnJuego.add(Pilar);
+            
+            
             matrizBotonesInterfaz[coordsPilar[0]][coordsPilar[1]].setIcon(Pilar.getApariencia().get(0));
             matrizPersonajes[coordsPilar[0]][coordsPilar[1]] = Pilar;
 

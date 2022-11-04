@@ -20,12 +20,12 @@ import javax.swing.ImageIcon;
  */
 
 enum Tipo{
-    AEREO(1),
-    CONTACTO(1),
-    MEDIOALCANCE(1),
-    IMPACTO(1),
-    BLOQUE(1),
-    ATAQUEMULTIPLE(1);
+    AEREO(5),
+    CONTACTO(5),
+    MEDIOALCANCE(5),
+    IMPACTO(5),
+    BLOQUE(5),
+    ATAQUEMULTIPLE(5);
 
     private final int campos;
 
@@ -96,6 +96,7 @@ public class Personaje {
         this.Apariencia = Apariencia;
         this.TipoDeAtaque = TipoDeAtaque;
         this.NivelAparicion = NivelAparicion;
+        this.Campos = TipoDeAtaque.getCampos();
     }
     
     public String getTipoDeAtaqueString(){
