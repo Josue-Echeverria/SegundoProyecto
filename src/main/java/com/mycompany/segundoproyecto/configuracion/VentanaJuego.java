@@ -146,7 +146,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!Datos.jugando){
+            
                 for (int i = 0; i < 27; i++) {
                     for (int j = 0; j < 27; j++) {
 
@@ -157,7 +157,7 @@ public class VentanaJuego extends javax.swing.JFrame {
                         }                    
                     }
                 }
-            }
+            
             
         }
     };

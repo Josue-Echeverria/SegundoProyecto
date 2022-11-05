@@ -78,7 +78,17 @@ public class Funciones {
                     Datos.personajeCargando = null;
 
             }
-        }
+        }else if (Datos.accionMouse == Datos.EstadoHaciendoMouse.NADA){
+
+                Personaje personajeConsulta = Datos.matrizPersonajes[i][j]; 
+                if (personajeConsulta != null){
+                    VentanaInformacion ventana = new VentanaInformacion(i, j);
+                    ventana.setVisible(true);
+                }
+                if(personajeConsulta == Datos.Pilar){
+                    Datos.accionMouse = Datos.EstadoHaciendoMouse.MOVIENDOPILAR;
+                }
+         }
         
         
         
