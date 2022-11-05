@@ -48,21 +48,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
         
-        Zombie prueba = Datos.zombies.get(0);
-        
-        int[] pos = {2,5};
-        int[] pos0 = {3,7};
-        
-        Defensa nueva = new Defensa(Datos.defensas.get(0).getNombre(),Datos.defensas.get(0).getVida(),Datos.defensas.get(0).getDañoPorSegundo(),Datos.defensas.get(0).getNivelAparicion(),Datos.defensas.get(0).getAlcance(),Datos.defensas.get(0).getApariencia(),Datos.defensas.get(0).getTipoDeAtaque());
-        Defensa nueva2 = new Defensa(Datos.defensas.get(1).getNombre(),Datos.defensas.get(1).getVida(),Datos.defensas.get(1).getDañoPorSegundo(),Datos.defensas.get(1).getNivelAparicion(),Datos.defensas.get(1).getAlcance(),Datos.defensas.get(1).getApariencia(),Datos.defensas.get(1).getTipoDeAtaque());
-        
-        Datos.defensasEnJuego.add(nueva);
-        Datos.defensasEnJuego.add(nueva2);
-        
-        Datos.defensasEnJuego.get(1).setPosicion(pos);
-        Datos.defensasEnJuego.get(0).setPosicion(pos0);
-        
-        
+
         //FIN DE LAS PRUEBAS
         ponePilar(10,10);
         
@@ -187,8 +173,8 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         pnlFondo = new javax.swing.JPanel();
         pnlDisponibles = new javax.swing.JPanel();
-        btJugar = new javax.swing.JButton();
         lbPerdiste = new javax.swing.JLabel();
+        btJugar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -209,6 +195,8 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         pnlDisponibles.setBackground(new java.awt.Color(0, 255, 0));
 
+        lbPerdiste.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
         btJugar.setText("Jugar");
         btJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,28 +204,26 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
         });
 
-        lbPerdiste.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
         javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
         pnlDisponibles.setLayout(pnlDisponiblesLayout);
         pnlDisponiblesLayout.setHorizontalGroup(
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDisponiblesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbPerdiste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlDisponiblesLayout.createSequentialGroup()
-                        .addComponent(btJugar)
-                        .addContainerGap(165, Short.MAX_VALUE))))
+                .addComponent(lbPerdiste, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btJugar)
+                .addContainerGap())
         );
         pnlDisponiblesLayout.setVerticalGroup(
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+                .addContainerGap()
                 .addComponent(btJugar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

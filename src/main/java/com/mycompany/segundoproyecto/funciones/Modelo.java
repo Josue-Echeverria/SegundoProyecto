@@ -208,18 +208,20 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
         
         int[] objetivo = {0,0};
         double distancia = 1000; //Distancia imposible para poder almacenar la primera distancia 
-        int x_zombie = zombie_actual.getPosicion()[0];
-        int y_zombie = zombie_actual.getPosicion()[1];
+        int x_zombie = zombie_actual.getPosicion()[1];
+        int y_zombie = zombie_actual.getPosicion()[0];
         for (int i = 0; i < Defensas.size(); i++){ //Recorre todas las defensas
-            int[] cordenadas_defensa = Defensas.get(i).getPosicion();
-            int x_defensa= cordenadas_defensa[0];
-            int y_defensa= cordenadas_defensa[1];
-            int desplazamiento_horizontal = x_zombie - x_defensa;
-            int desplazamiento_vertical = y_zombie - y_defensa;
-            double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
-            if (pitagoras <= distancia){
-                distancia = pitagoras;
-                objetivo = cordenadas_defensa;
+            if (zombie_actual.EsAereo()  == Defensas.get(i).EsAereo()){
+                int[] cordenadas_defensa = Defensas.get(i).getPosicion();
+                int x_defensa= cordenadas_defensa[0];
+                int y_defensa= cordenadas_defensa[1];
+                int desplazamiento_horizontal = x_zombie - x_defensa;
+                int desplazamiento_vertical = y_zombie - y_defensa;
+                double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+                if (pitagoras <= distancia){
+                    distancia = pitagoras;
+                    objetivo = cordenadas_defensa;
+                }
             }
         }
         return objetivo;

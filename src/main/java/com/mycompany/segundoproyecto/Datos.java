@@ -48,8 +48,8 @@ public class Datos {
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-    //static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
-    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+    static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
+    //static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
     static public Defensa Pilar;
     static public int[] coordsPilar;
     static public int campos;
@@ -96,7 +96,6 @@ public class Datos {
             images.add(new ImageIcon(image));
             Pilar= new Defensa("Pilar",1,0,1,0,images,Personaje.tipoPilar);
             coordsPilar = new int[2];
-
             coordsPilar[0] = i;
             coordsPilar[1] = j;
             int[] pos = {j,i};

@@ -58,11 +58,6 @@ public class ThreadCaminar extends Thread {
         
         //PRUEBAS(BORRARME DEL ARCHIVO)
         
-        Datos.matrizBotonesInterfaz[2][5].setIcon(Datos.defensasEnJuego.get(1).getApariencia().get(0));
-        Datos.matrizPersonajes[2][5] = Datos.defensasEnJuego.get(1);
-        
-        Datos.matrizBotonesInterfaz[3][7].setIcon(Datos.defensasEnJuego.get(0).getApariencia().get(0));
-        Datos.matrizPersonajes[3][7] = Datos.defensasEnJuego.get(0);
 
         //FIN DE LAS PRUEBAS        
     }
@@ -78,6 +73,7 @@ public class ThreadCaminar extends Thread {
                 int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensasEnJuego);
                 jfinal = objetivo[0];
                 ifinal = objetivo[1];
+                personaje.tostring();
                 
                 //FIN DE LAS PRUEBAS
                 
@@ -93,7 +89,6 @@ public class ThreadCaminar extends Thread {
                 int b = jinicio - jfinal;
                 //
                 if (new Modelo().calcular_distancia(a,b) <= personaje.getAlcance()){
-                    //System.out.println("Llegue a mi objetivo "+ new Modelo().calcular_distancia(a,b));
                     //System.out.println(coordInicio);
                     pausa();
                 }else if(quienResta == Cordenada.x){
@@ -119,55 +114,33 @@ public class ThreadCaminar extends Thread {
                     }
                     quienResta = Cordenada.x;         
                 }
-                /*try {
-                    if (Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString().equals(null) ){
-                        //System.out.println("Es la base");
-                    }else{
-                        //System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());
-                        //System.out.println("no es la base");
-                        pausa();
-                        /*System.out.println(Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon().toString());
-                        System.out.println(Datos.ruta+"Base.png");
-                    }
-                } catch (Exception e) {
-                   
-                }*/
-                
-                
-                
-                
             } catch (InterruptedException ex) {
             }
-            
             while (isPaused) {                
                 try {
                     sleep(500);
                     System.out.println("Atacando");
                     System.out.println(""+jfinal+"-"+ifinal);
+                    Personaje PersonajeSiendoAtacado = Datos.matrizPersonajes[jfinal][ifinal];
+                    Personaje PersonajeAtacando = Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]];
                     //Datos.matrizPersonajes[jinicio][iinicio].setVida(Datos.matrizPersonajes[jinicio][iinicio].getVida()-Datos.matrizPersonajes[jinicio][iinicio].getDañoPorSegundo());
-                    if (Datos.matrizPersonajes[jfinal][ifinal] != null){
-                            Datos.matrizPersonajes[jfinal][ifinal].setVida(Datos.matrizPersonajes[jfinal][ifinal].getVida()-Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]].getDañoPorSegundo());
-                    
-                            if(Datos.matrizPersonajes[jfinal][ifinal].getVida() <= 0){
-                                
-                                
-                                Personaje eliminado = Datos.matrizPersonajes[jfinal][ifinal];
-                                System.out.println("****");
-                                System.out.println(Datos.defensasEnJuego.remove(Datos.matrizPersonajes[jfinal][ifinal]));
-                                System.out.println("****");
-                                Datos.matrizPersonajes[jfinal][ifinal] = null;
+                    if (PersonajeSiendoAtacado != null){
+                        if (PersonajeSiendoAtacado.EsAereo()  == PersonajeAtacando.EsAereo()){
+                            PersonajeSiendoAtacado.setVida(PersonajeSiendoAtacado.getVida()-PersonajeAtacando.getDañoPorSegundo());
+                            PersonajeAtacando.setVida(PersonajeAtacando.getVida()-PersonajeSiendoAtacado.getDañoPorSegundo());
+                            if(PersonajeSiendoAtacado.getVida() <= 0){
+                            
+                                Personaje eliminado = PersonajeSiendoAtacado;
+                                Datos.defensasEnJuego.remove(PersonajeSiendoAtacado);
+                                PersonajeSiendoAtacado = null;
                                 Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(null);
-                                
+
                                 if(eliminado == Datos.Pilar){
                                     System.out.println("Perdiste");
                                     Datos.labelResultado.setText("Perdiste");
                                     for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
                                         ThreadZomby.finish();
-                                        
-                                        
-                                        
                                     }
-                                    
                                     Datos.ThreadZombies.clear();
                                     finish();
                                 }
@@ -179,11 +152,16 @@ public class ThreadCaminar extends Thread {
                                 }else{
                                     finish();
                                 }
-                                    
-                                
                                 break;
                             }
-                    }else{
+                            else if(PersonajeAtacando.getVida()<=0){
+                                Datos.ZombiesEnJuego.remove(PersonajeAtacando);
+                                PersonajeAtacando = null;
+                                Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(null);
+                            }
+                        }
+                    }
+                    else{
                         pausa();
                     }
                     

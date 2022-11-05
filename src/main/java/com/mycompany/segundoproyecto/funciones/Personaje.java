@@ -119,6 +119,10 @@ public class Personaje {
         return Alcance;
     }
     
+    public boolean EsAereo(){
+        return getTipoDeAtaque() == Tipo.AEREO;
+    }
+    
     public void setTipoDeAtaque(Tipo tipodeataque){
         this.TipoDeAtaque = tipodeataque;
     }
