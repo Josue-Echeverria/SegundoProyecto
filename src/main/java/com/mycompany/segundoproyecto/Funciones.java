@@ -160,7 +160,7 @@ public class Funciones {
             Random r = new Random();
             double valorDado = r.nextInt(15)+5;
             double porcentaje = valorDado/100;
-            
+            System.out.println(porcentaje);
             defensa.incremetaestadisticas(porcentaje);
             
         }

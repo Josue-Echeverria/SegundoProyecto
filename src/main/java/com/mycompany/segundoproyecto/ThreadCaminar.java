@@ -190,6 +190,7 @@ public void run(){
                                 if(eliminado == Datos.Pilar){
                                     System.out.println("Perdiste");
                                     Datos.labelResultado.setText("Perdiste");
+                                    Funciones.subirnivel();
                                     for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
                                         ThreadZomby.finish();
                                     }
