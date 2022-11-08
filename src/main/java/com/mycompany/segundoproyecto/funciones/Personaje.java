@@ -27,7 +27,7 @@ enum Tipo{
     BLOQUE(5),
     ATAQUEMULTIPLE(5);
 
-    private final int campos;
+    public final int campos;
 
     private Tipo() {
         this.campos = 0;
@@ -71,9 +71,11 @@ enum Tipo{
 public class Personaje {
     public static Tipo tipoPilar = Tipo.CONTACTO;
     private int Vida;
+    private int VidaOriginal;
     private int DañoPorSegundo;
     private String Nombre;
     private ArrayList<ImageIcon> Apariencia;
+    private String registro;
     private Tipo TipoDeAtaque;
     private int Nivel;
     private int Alcance;
@@ -85,11 +87,16 @@ public class Personaje {
     public Tipo getTipoDeAtaque(){
         return this.TipoDeAtaque;
     }
+    
+    public int getCamposTipoDeAtaque(){
+        return this.TipoDeAtaque.getCampos();
+    }
 
     public Personaje(int Vida, int DañoPorSegundo, String Nombre,
             ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque, 
             int NivelAparicion, int alcance) {
         this.Vida = Vida;
+        this.VidaOriginal = Vida;
         this.DañoPorSegundo = DañoPorSegundo;
         this.Nombre = Nombre;
         this.Alcance = alcance;
@@ -97,6 +104,7 @@ public class Personaje {
         this.TipoDeAtaque = TipoDeAtaque;
         this.NivelAparicion = NivelAparicion;
         this.Campos = TipoDeAtaque.getCampos();
+        this.registro = "\n" ;
     }
     
     public String getTipoDeAtaqueString(){
@@ -115,12 +123,20 @@ public class Personaje {
         
     }
 
+    public int getVidaOriginal() {
+        return VidaOriginal;
+    }
+
     public int getAlcance() {
         return Alcance;
     }
     
     public boolean EsAereo(){
         return getTipoDeAtaque() == Tipo.AEREO;
+    }
+    
+    public boolean EsImpacto(){
+        return getTipoDeAtaque() == Tipo.IMPACTO;
     }
     
     public void setTipoDeAtaque(Tipo tipodeataque){
@@ -133,6 +149,14 @@ public class Personaje {
 
     public void setVida(int Vida) {
         this.Vida = Vida;
+    }
+
+    public String getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(String registro) {
+        this.registro = registro;
     }
 
     public int getDañoPorSegundo() {
@@ -185,7 +209,7 @@ public class Personaje {
     
     public void tostring(){
         System.out.println("Hola soy "+ this.Nombre +"\n" +
-                " Mi ataque es de tipo " +this.TipoDeAtaque+"\n"+
+                "Mi ataque es de tipo " +this.TipoDeAtaque+"\n"+
                 "Tengo "+ this.Vida+" de vida"+"\n"+
                 "Mi daño por segundo es de: "+this.DañoPorSegundo+"\n"+
                 "Aparezco en el nivel: "+this.NivelAparicion+"\n"+

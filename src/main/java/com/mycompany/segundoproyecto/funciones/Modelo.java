@@ -208,8 +208,8 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
         
         int[] objetivo = {0,0};
         double distancia = 1000; //Distancia imposible para poder almacenar la primera distancia 
-        int x_zombie = zombie_actual.getPosicion()[1];
-        int y_zombie = zombie_actual.getPosicion()[0];
+        int x_zombie = zombie_actual.getPosicion()[0];
+        int y_zombie = zombie_actual.getPosicion()[1];
         for (int i = 0; i < Defensas.size(); i++){ //Recorre todas las defensas
             if (zombie_actual.EsAereo()  == Defensas.get(i).EsAereo()){
                 int[] cordenadas_defensa = Defensas.get(i).getPosicion();
@@ -225,7 +225,163 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
             }
         }
         return objetivo;
-    }   
+    }
+    
+    public void recibe_daño(Zombie zombie_actual, ArrayList<Defensa> Defensas){
+            int x_zombie = zombie_actual.getPosicion()[0];
+            int y_zombie = zombie_actual.getPosicion()[1];
+            for (int i = 0; i < Defensas.size(); i++){ //Recorre todas las defensas
+                if (zombie_actual.EsAereo()  == Defensas.get(i).EsAereo()){
+                    int[] cordenadas_defensa = Defensas.get(i).getPosicion();
+                    int x_defensa= cordenadas_defensa[0];
+                    int y_defensa= cordenadas_defensa[1];
+                    int desplazamiento_horizontal = x_zombie - x_defensa;
+                    int desplazamiento_vertical = y_zombie - y_defensa;
+                    double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+                    if(pitagoras <= Defensas.get(i).getAlcance()){//Si la defensa tien rango para pegarlo
+                        if (!Defensas.get(i).EsImpacto()){
+                            zombie_actual.setVida(zombie_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
+
+                            Defensas.get(i).setRegistro(Defensas.get(i).getRegistro()+ "\nAtacó a: "+ zombie_actual.getNombre() +
+                                    "\nRealizando "+Defensas.get(i).getDañoPorSegundo()+" de daño"+
+                                    "\nDejandolo a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+
+                            zombie_actual.setRegistro(zombie_actual.getRegistro()+ "\nFue atacado por "+Defensas.get(i).getNombre()+
+                                    "\nLe bajo "+Defensas.get(i).getDañoPorSegundo()+" puntos de vida"+
+                                    "\nQuedando a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+
+
+                            if (zombie_actual.getVida()<=0){
+                                break;
+                            }
+                        }else{
+                            zombie_actual.setVida(0);
+                            Defensas.get(i).setVida(0);
+                            Defensas.get(i).setRegistro(Defensas.get(i).getRegistro()+ "\nExplotó contra: "+ zombie_actual.getNombre() +
+                                    "\nRealizando "+Defensas.get(i).getDañoPorSegundo()+" de daño"+
+                                    "\nDejandolo a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+
+                            zombie_actual.setRegistro(zombie_actual.getRegistro()+ "\nExplotó por "+Defensas.get(i).getNombre());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    public void aereo_recibe_daño(Personaje personaje_actual, ArrayList<Defensa> Defensas,ArrayList<Zombie> zombies){
+        try{
+            Zombie zombie_actual = (Zombie)personaje_actual;
+            int x_zombie = zombie_actual.getPosicion()[0];
+            int y_zombie = zombie_actual.getPosicion()[1];
+            for (int i = 0; i < Defensas.size(); i++){ //Recorre todas las defensas
+                if (Defensas.get(i).EsAereo()){
+                    int[] cordenadas_defensa = Defensas.get(i).getPosicion();
+                    int x_defensa= cordenadas_defensa[0];
+                    int y_defensa= cordenadas_defensa[1];
+                    int desplazamiento_horizontal = x_zombie - x_defensa;
+                    int desplazamiento_vertical = y_zombie - y_defensa;
+                    double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+                    if(pitagoras <= Defensas.get(i).getAlcance()){//Si la defensa tien rango para pegarlo
+                        zombie_actual.setVida(zombie_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
+
+                        Defensas.get(i).setRegistro(Defensas.get(i).getRegistro()+ "\nAtacó a: "+ zombie_actual.getNombre() +
+                                "\nRealizando "+Defensas.get(i).getDañoPorSegundo()+" de daño"+
+                                "\nDejandolo a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+
+                        zombie_actual.setRegistro(zombie_actual.getRegistro()+ "\nFue atacado por "+Defensas.get(i).getNombre()+
+                                "\nLe bajo "+Defensas.get(i).getDañoPorSegundo()+" puntos de vida"+
+                                "\nQuedando a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+
+                        if (zombie_actual.getVida()<=0){
+                            break;
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+            Defensa defensa_actual = (Defensa)personaje_actual;
+            int x_defensa = defensa_actual.getPosicion()[0];
+            int y_defensa = defensa_actual.getPosicion()[1];
+            for (int i = 0; i < zombies.size(); i++){ //Recorre todas las defensas
+                if (zombies.get(i).EsAereo()){
+                    int[] cordenadas_zombie = zombies.get(i).getPosicion();
+                    int x_zombie= cordenadas_zombie[0];
+                    int y_zombie= cordenadas_zombie[1];
+                    int desplazamiento_horizontal = x_zombie - x_defensa;
+                    int desplazamiento_vertical = y_zombie - y_defensa;
+                    double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+                    if(pitagoras <= zombies.get(i).getAlcance()){//Si la defensa tien rango para pegarlo
+                        defensa_actual.setVida(defensa_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
+
+                        zombies.get(i).setRegistro(zombies.get(i).getRegistro()+ "\nAtacó a: "+ defensa_actual.getNombre() +
+                                "\nRealizando "+zombies.get(i).getDañoPorSegundo()+" de daño"+
+                                "\nDejandolo a "+defensa_actual.getVida() + "/"+defensa_actual.getVidaOriginal()+ " de vida");
+
+                        defensa_actual.setRegistro(defensa_actual.getRegistro()+ "\nFue atacado por "+zombies.get(i).getNombre()+
+                                "\nLe bajo "+Defensas.get(i).getDañoPorSegundo()+" puntos de vida"+
+                                "\nQuedando a "+defensa_actual.getVida() + "/"+defensa_actual.getVidaOriginal()+ " de vida");
+
+
+                        if (defensa_actual.getVida()<=0){
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }  
+
+
+    public int[] calcular_objetivo_aereo(Personaje personaje_actual, ArrayList<Defensa> Defensas,ArrayList<Zombie> zombies){
+        try{
+            Zombie zombie_actual = (Zombie)personaje_actual;    
+
+            int[] objetivo = {0,0};
+            double distancia = 1000; //Distancia imposible para poder almacenar la primera distancia 
+            int x_zombie = zombie_actual.getPosicion()[0];
+            int y_zombie = zombie_actual.getPosicion()[1];
+            for (int i = 0; i < Defensas.size(); i++){ //Recorre todas las defensas
+               // if (zombie_actual.EsAereo()  == Defensas.get(i).EsAereo()){
+                int[] cordenadas_defensa = Defensas.get(i).getPosicion();
+                int x_defensa= cordenadas_defensa[0];
+                int y_defensa= cordenadas_defensa[1];
+                int desplazamiento_horizontal = x_zombie - x_defensa;
+                int desplazamiento_vertical = y_zombie - y_defensa;
+                double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+                if (pitagoras <= distancia){
+                    distancia = pitagoras;
+                    objetivo = cordenadas_defensa;
+                }
+            }
+            return objetivo;
+        }catch(Exception e){
+            Defensa defensa_actual = (Defensa)personaje_actual;
+            int[] objetivo = {0,0};
+            double distancia = 1000; //Distancia imposible para poder almacenar la primera distancia 
+            int x_defensa = defensa_actual.getPosicion()[0];
+            int y_defensa = defensa_actual.getPosicion()[1];
+            for (int i = 0; i < zombies.size(); i++){ //Recorre todas las defensas
+                //if (defensa_actual.EsAereo()  == Defensas.get(i).EsAereo()){
+                    int[] cordenadas_zombie = zombies.get(i).getPosicion();
+                    int x_zombie= cordenadas_zombie[0];
+                    int y_zombie= cordenadas_zombie[1];
+                    int desplazamiento_horizontal = x_zombie - x_defensa;
+                    int desplazamiento_vertical = y_zombie - y_defensa;
+                    double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
+                    if (pitagoras <= distancia){
+                        distancia = pitagoras;
+                        objetivo = cordenadas_zombie;
+                    }
+                
+            }
+        return objetivo;
+        }
+    }
+    
+    
+    
     public double calcular_distancia(int a, int b){
         double distancia = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
         return distancia;

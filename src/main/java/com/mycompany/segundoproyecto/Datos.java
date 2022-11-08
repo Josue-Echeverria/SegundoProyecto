@@ -34,6 +34,7 @@ public class Datos {
     MOVIENDOPILAR,
     NADA;
     }
+    
     static public JButton[][] matrizBotonesInterfaz;
     static public Personaje[][] matrizPersonajes;
     static public JButton[] matrizBotonesApareceZombies;
@@ -44,12 +45,17 @@ public class Datos {
     static public ArrayList<Zombie> ZombiesEnJuego;
     static public boolean jugando;
     static public ArrayList<ThreadCaminar> ThreadZombies;
+    static public ArrayList<ThreadVolar> ThreadVoladores;
+    
     static public javax.swing.JLabel labelResultado;
+    static public javax.swing.JLabel label_campos_disponibles;
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
     static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
+    static public String Muerto = "C:\\Users\\Jecheverria\\Personajes\\DeadZombie.PNG";//Modificar 
     //static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+    //static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\DeadZombie.PNG";//Modificar 
     static public Defensa Pilar;
     static public int[] coordsPilar;
     static public int campos;
@@ -59,23 +65,15 @@ public class Datos {
         personajeCargando = null;
         nivel = 1;
         jugando = false;
-        campos = 20;
+        campos = 0;
         matrizBotonesInterfaz = new JButton[27][27];
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
         defensasDisponibles = new ArrayList<>();
         defensasEnJuego = new ArrayList<>();
         ZombiesEnJuego = new ArrayList<>();
-        ThreadZombies = new ArrayList<>();
-        
-       
-        
-        
-        
-        //***************
-        
-        
-        
+        ThreadZombies = new ArrayList<>(); 
+        ThreadVoladores = new ArrayList<>(); 
         try {
             personajes =  new Modelo().read_personajes();
             zombies =  new Modelo().read_Zombies();
@@ -91,8 +89,8 @@ public class Datos {
         ArrayList<ImageIcon> images = new ArrayList();
         BufferedImage bufferedImage;
         try {
-            bufferedImage = ImageIO.read(new File(ruta+"Defensa6.png"));
-            Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            bufferedImage = ImageIO.read(new File(ruta+"Pilar.png"));
+            Image image = bufferedImage.getScaledInstance(27, 27, Image.SCALE_DEFAULT);
             images.add(new ImageIcon(image));
             Pilar= new Defensa("Pilar",1,0,1,0,images,Personaje.tipoPilar);
             coordsPilar = new int[2];

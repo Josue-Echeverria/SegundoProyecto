@@ -13,7 +13,8 @@ import javax.swing.ImageIcon;
  */
 public class Zombie extends Personaje{
     public Zombie( String Nombre, int Vida,  int DañoPorSegundo,
-            int NivelAparicion, int alcance, ArrayList<ImageIcon> Apariencia, Tipo TipoDeAtaque) {
+            int NivelAparicion, int alcance, ArrayList<ImageIcon> Apariencia,
+            Tipo TipoDeAtaque) {
         super(Vida, DañoPorSegundo, Nombre, Apariencia, TipoDeAtaque, NivelAparicion, alcance);
     }
 }

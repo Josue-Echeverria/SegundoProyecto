@@ -57,26 +57,21 @@ public class Funciones {
                     Datos.accionMouse = Datos.EstadoHaciendoMouse.MOVIENDOPILAR;
                 }
             }else if (Datos.accionMouse == Datos.EstadoHaciendoMouse.CARGANDOPERSONAJE && Datos.matrizPersonajes[i][j] == null ){
+                String[] datosboton = Datos.personajeCargando.split("%");
+                int indice = Integer.parseInt(datosboton[1]);
+                if (Datos.campos+Datos.defensas.get(indice).getCamposTipoDeAtaque() <= 20){
                     BufferedImage bufferedImage;
-
-                    String[] datosboton = Datos.personajeCargando.split("%");
-
-                    int indice = Integer.parseInt(datosboton[1]);
-                    /*bufferedImage = ImageIO.read(new File());
-
-                    Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-                    ImageIcon icon = new ImageIcon(image);*/
                     Datos.matrizBotonesInterfaz[i][j].setIcon(Datos.defensas.get(indice).getApariencia().get(0));
                     Defensa nueva = new Defensa(Datos.defensas.get(indice).getNombre(),Datos.defensas.get(indice).getVida(),Datos.defensas.get(indice).getDañoPorSegundo(),Datos.defensas.get(indice).getNivelAparicion(),Datos.defensas.get(indice).getAlcance(),Datos.defensas.get(indice).getApariencia(),Datos.defensas.get(indice).getTipoDeAtaque());
-
                     int[] pos0 = {i,j};
                     nueva.setPosicion(pos0);
                     Datos.defensasEnJuego.add(nueva);
-
                     Datos.matrizPersonajes[i][j] = nueva;
                     Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
                     Datos.personajeCargando = null;
-
+                    Datos.campos+=Datos.defensas.get(indice).getCamposTipoDeAtaque();
+                    Datos.label_campos_disponibles.setText("Espacio disponible: "+Datos.campos + "/20"); 
+                }
             }
         }else if (Datos.accionMouse == Datos.EstadoHaciendoMouse.NADA){
 
@@ -106,10 +101,7 @@ public class Funciones {
         for (Zombie zomby : Datos.zombies) {
             if(zomby.getCampos()< menor){
                 menor = zomby.getCampos();
-                
             }
-                
-            
         }
         int copiacampos = Datos.campos;
         while(copiacampos > 0){
@@ -125,28 +117,38 @@ public class Funciones {
             
             if(Datos.zombies.get(valorDado).getCampos()<= copiacampos){
                 
-                
                 copiacampos -= Datos.zombies.get(valorDado).getCampos();
-                
                 String[] COORDString = Datos.matrizBotonesApareceZombies[valorDado2].getText().split("-");
                 int i = Integer.parseInt(COORDString[1]);
                 int j = Integer.parseInt(COORDString[0]);
                 Zombie nuevo = new Zombie(Datos.zombies.get(valorDado).getNombre(),Datos.zombies.get(valorDado).getVida(),Datos.zombies.get(valorDado).getDañoPorSegundo(),Datos.zombies.get(valorDado).getNivelAparicion(),Datos.zombies.get(valorDado).getAlcance(),Datos.zombies.get(valorDado).getApariencia(),Datos.zombies.get(valorDado).getTipoDeAtaque());
+                
                 Datos.ZombiesEnJuego.add(nuevo);
-                ThreadCaminar tr = new ThreadCaminar(nuevo, i,j );
-                tr.start();
-                Datos.ThreadZombies.add(tr);
+                if(!nuevo.EsAereo()){
+                    ThreadCaminar tr = new ThreadCaminar(nuevo, i,j );
+                    tr.start();
+                    Datos.ThreadZombies.add(tr);
+                }
+                else{
+                    ThreadVolar tr = new ThreadVolar(nuevo, i,j );
+                    tr.start();
+                    Datos.ThreadVoladores.add(tr);
+                
+                }
+           
             }
             if(copiacampos < menor){
                 break;
                 
-            }
-            
+            }  
         } 
-        
-            
-        
-        
+        for (Defensa defensa : Datos.defensasEnJuego){
+            if (defensa.EsAereo()){
+                ThreadVolar tr = new ThreadVolar(defensa, defensa.getPosicion()[1],defensa.getPosicion()[0] );
+                tr.start();
+                Datos.ThreadVoladores.add(tr);         
+            }
+        }
     }
 }
 

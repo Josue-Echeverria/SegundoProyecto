@@ -42,7 +42,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         creaMatrizJugable();
         creaMatrixPersonaje();
         Datos.labelResultado = lbPerdiste;
-        
+        Datos.label_campos_disponibles = lbl_disponibles;
 
         
         
@@ -134,9 +134,6 @@ public class VentanaJuego extends javax.swing.JFrame {
                 Datos.personajeCargando = boton.getText();
                 System.out.println(boton.getText());
             }
-            
-            
-            
         }
       };
     ActionListener al=new ActionListener(){
@@ -147,18 +144,14 @@ public class VentanaJuego extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-                for (int i = 0; i < 27; i++) {
-                    for (int j = 0; j < 27; j++) {
-
-                        if (e.getSource() == Datos.matrizBotonesInterfaz[j][i]){
-
-                            Funciones.FuncionBotones(j, i);
-                            break;
-                        }                    
-                    }
+            for (int i = 0; i < 27; i++) {
+                for (int j = 0; j < 27; j++) {                    
+                    if (e.getSource() == Datos.matrizBotonesInterfaz[j][i]){
+                        Funciones.FuncionBotones(j, i);
+                        break;
+                    }                    
                 }
-            
-            
+            }
         }
     };
 
@@ -174,7 +167,9 @@ public class VentanaJuego extends javax.swing.JFrame {
         pnlFondo = new javax.swing.JPanel();
         pnlDisponibles = new javax.swing.JPanel();
         lbPerdiste = new javax.swing.JLabel();
+        lbl_campos_disponibles = new javax.swing.JLabel();
         btJugar = new javax.swing.JButton();
+        lbl_disponibles = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -197,6 +192,28 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         lbPerdiste.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
+        pnlDisponibles.setLayout(pnlDisponiblesLayout);
+        pnlDisponiblesLayout.setHorizontalGroup(
+            pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDisponiblesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPerdiste, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
+                        .addComponent(lbl_campos_disponibles)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        pnlDisponiblesLayout.setVerticalGroup(
+            pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_campos_disponibles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
+        );
+
         btJugar.setText("Jugar");
         btJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,27 +221,7 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
-        pnlDisponibles.setLayout(pnlDisponiblesLayout);
-        pnlDisponiblesLayout.setHorizontalGroup(
-            pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDisponiblesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbPerdiste, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btJugar)
-                .addContainerGap())
-        );
-        pnlDisponiblesLayout.setVerticalGroup(
-            pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btJugar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
-        );
+        lbl_disponibles.setText("Espacio disponible: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,14 +229,27 @@ public class VentanaJuego extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbl_disponibles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btJugar)
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
-            .addComponent(pnlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btJugar)
+                    .addComponent(lbl_disponibles))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,6 +297,8 @@ public class VentanaJuego extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btJugar;
     private javax.swing.JLabel lbPerdiste;
+    private javax.swing.JLabel lbl_campos_disponibles;
+    private javax.swing.JLabel lbl_disponibles;
     private javax.swing.JPanel pnlDisponibles;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables

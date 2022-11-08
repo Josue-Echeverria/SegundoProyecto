@@ -5,6 +5,8 @@
  */
 package com.mycompany.segundoproyecto;
 
+import com.mycompany.segundoproyecto.configuracion.VentanaResultados;
+import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Modelo;
 import com.mycompany.segundoproyecto.funciones.Personaje;
 import com.mycompany.segundoproyecto.funciones.Zombie;
@@ -63,24 +65,30 @@ public class ThreadCaminar extends Thread {
     }
     
     
-    
-    @Override
-    public void run(){
+@Override
+public void run(){
         while (isRunning){
             try {
                 //PRUEBAS(BORRARME DEL ARCHIVO)
-                
-                int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensasEnJuego);
-                jfinal = objetivo[0];
-                ifinal = objetivo[1];
-                personaje.tostring();
+                new Modelo().recibe_daño((Zombie)personaje, Datos.defensasEnJuego);
+                if(personaje.getVida() <= 0){
+                    break;
+                }
+
+//                personaje.tostring();
                 
                 //FIN DE LAS PRUEBAS
                 
                 coordsanterior = new int[]{jinicio,iinicio};
                 Icon icono = Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon();
                 Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(imagen);
-                String coordInicio = ""+ iinicio+"-"+jinicio;
+                int[] pos = {jinicio, iinicio};
+                personaje.setPosicion(pos);
+                int[] objetivo = new Modelo().calcular_objetivo((Zombie)personaje, Datos.defensasEnJuego);
+                jfinal = objetivo[0];
+                ifinal = objetivo[1];
+                
+
                 sleep(1000);
                 
                 //PRUEBA
@@ -92,11 +100,11 @@ public class ThreadCaminar extends Thread {
                     //System.out.println(coordInicio);
                     pausa();
                 }else if(quienResta == Cordenada.x){
-                    if(jinicio == jfinal ){
+                    if(jinicio == jfinal){
                         quienResta = Cordenada.y;
                         continue;
                     }else{
-                        if(jinicio > jfinal ){
+                        if(jinicio > jfinal){
                             jinicio -= 1;
                         }else{
                             jinicio += 1;
@@ -120,16 +128,25 @@ public class ThreadCaminar extends Thread {
                 try {
                     sleep(500);
                     System.out.println("Atacando");
-                    System.out.println(""+jfinal+"-"+ifinal);
                     Personaje PersonajeSiendoAtacado = Datos.matrizPersonajes[jfinal][ifinal];
                     Personaje PersonajeAtacando = Datos.matrizPersonajes[coordsanterior[0]][coordsanterior[1]];
-                    //Datos.matrizPersonajes[jinicio][iinicio].setVida(Datos.matrizPersonajes[jinicio][iinicio].getVida()-Datos.matrizPersonajes[jinicio][iinicio].getDañoPorSegundo());
-                    if (PersonajeSiendoAtacado != null){
-                        if (PersonajeSiendoAtacado.EsAereo()  == PersonajeAtacando.EsAereo()){
+                    if (PersonajeSiendoAtacado != null & PersonajeAtacando != null &PersonajeSiendoAtacado !=PersonajeAtacando){
+                       if (!PersonajeAtacando.EsImpacto()){
                             PersonajeSiendoAtacado.setVida(PersonajeSiendoAtacado.getVida()-PersonajeAtacando.getDañoPorSegundo());
-                            PersonajeAtacando.setVida(PersonajeAtacando.getVida()-PersonajeSiendoAtacado.getDañoPorSegundo());
-                            if(PersonajeSiendoAtacado.getVida() <= 0){
+                            PersonajeAtacando.setRegistro(PersonajeAtacando.getRegistro()+ "\nAtacó a: "+ PersonajeSiendoAtacado.getNombre() +
+                            "\nRealizando "+PersonajeAtacando.getDañoPorSegundo()+" de daño"+
+                            "\nDejandolo a "+PersonajeSiendoAtacado.getVida() + "/"+PersonajeSiendoAtacado.getVidaOriginal()+ " de vida");
+
                             
+                            PersonajeSiendoAtacado.setRegistro(PersonajeSiendoAtacado.getRegistro()+ "\nFue atacado por "+PersonajeAtacando.getNombre()+
+                            "\nLe bajo "+PersonajeAtacando.getDañoPorSegundo()+" puntos de vida"+
+                            "\nQuedando a "+PersonajeSiendoAtacado.getVida() + "/"+PersonajeSiendoAtacado.getVidaOriginal()+ " de vida");
+                    
+              
+                            
+                            new Modelo().recibe_daño((Zombie)PersonajeAtacando, Datos.defensasEnJuego);
+
+                            if(PersonajeSiendoAtacado.getVida() <= 0){
                                 Personaje eliminado = PersonajeSiendoAtacado;
                                 Datos.defensasEnJuego.remove(PersonajeSiendoAtacado);
                                 PersonajeSiendoAtacado = null;
@@ -142,6 +159,7 @@ public class ThreadCaminar extends Thread {
                                         ThreadZomby.finish();
                                     }
                                     Datos.ThreadZombies.clear();
+                                    new VentanaResultados().setVisible(true);
                                     finish();
                                 }
                                 pausa();
@@ -154,37 +172,42 @@ public class ThreadCaminar extends Thread {
                                 }
                                 break;
                             }
-                            else if(PersonajeAtacando.getVida()<=0){
-                                Datos.ZombiesEnJuego.remove(PersonajeAtacando);
-                                PersonajeAtacando = null;
-                                Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(null);
+                            if(personaje.getVida() <= 0){
+                                break;
                             }
-                        }
+                        }else{//Es impacto
+                           
+                            PersonajeSiendoAtacado.setVida(0);
+                            PersonajeAtacando.setRegistro(PersonajeAtacando.getRegistro()+ "\nExploto contra: "+ PersonajeSiendoAtacado.getNombre() +
+                            "\nRealizando "+PersonajeAtacando.getDañoPorSegundo()+" de daño"+
+                            "\nDejandolo a "+PersonajeSiendoAtacado.getVida() + "/"+PersonajeSiendoAtacado.getVidaOriginal()+ " de vida");
+                            if(PersonajeSiendoAtacado.getVida() <= 0){
+                                Personaje eliminado = PersonajeSiendoAtacado;
+                                Datos.defensasEnJuego.remove(PersonajeSiendoAtacado);
+                                PersonajeSiendoAtacado = null;
+                                Datos.matrizBotonesInterfaz[jfinal][ifinal].setIcon(null);
+
+                                if(eliminado == Datos.Pilar){
+                                    System.out.println("Perdiste");
+                                    Datos.labelResultado.setText("Perdiste");
+                                    for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
+                                        ThreadZomby.finish();
+                                    }
+                                    Datos.ThreadZombies.clear();
+                                    new VentanaResultados().setVisible(true);
+                                    finish();
+                                }
+                            }
+                            PersonajeAtacando.setVida(0);
+                            break;
+                        }   
                     }
                     else{
                         pausa();
                     }
-                    
                 } catch (InterruptedException ex) {
-                    
                 }
             }
-               
-                //String hola = Datos.matrizBotonesInterfaz[jinicio][iinicio].getIcon();
-                /*if(borde){
-                    int contador = 0;
-                    for (JButton bt : Datos.matrizBotonesApareceZombies) {
-                        contador += 1;
-                        
-                        if (Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].equals(bt)){
-                            Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(new javax.swing.ImageIcon(Datos.ruta+"BaseBloqueada.png"));
-                            break;
-                        }
-                        if(contador == 53){
-                            borde = false;
-                        }
-                    }
-                }*/
             if (Datos.ZombiesEnJuego.contains(Datos.matrizPersonajes[jinicio][iinicio])){
                 jinicio = coordsanterior[0];
                 iinicio = coordsanterior[1];
@@ -194,14 +217,23 @@ public class ThreadCaminar extends Thread {
                 Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(new javax.swing.ImageIcon(Datos.ruta+imagen));
                 Datos.matrizPersonajes[jinicio][iinicio] = personaje;
             }
-        
-                
-            
-            
         }
-        
-    }
-    public boolean pausa(){
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(new File(Datos.Muerto));
+            Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            Datos.matrizBotonesInterfaz[coordsanterior[0]][coordsanterior[1]].setIcon(null);
+            Datos.matrizBotonesInterfaz[jinicio][iinicio].setIcon(null);
+            Datos.matrizPersonajes[jinicio][iinicio] = null;
+            
+   
+        } catch (IOException ex) {
+            Logger.getLogger(ThreadCaminar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+   }
+
+public boolean pausa(){
         this.isPaused = !this.isPaused;
         return this.isPaused;
     }
