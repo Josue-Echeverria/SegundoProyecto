@@ -28,7 +28,7 @@ public class SegundoProyecto {
         
        // System.out.println("Hello World!");
 //        new Principal().setVisible(true);
-        //new VentanaJuego().setVisible(true);
+        new VentanaJuego().setVisible(true);
 //        try {
 //            ArrayList<Zombie> hermano = new Modelo().read_Zombies();
 //            System.out.println(hermano.get(0).getNombre());
