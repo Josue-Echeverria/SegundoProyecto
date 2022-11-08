@@ -5,9 +5,12 @@
 package com.mycompany.segundoproyecto.configuracion;
 
 import com.mycompany.segundoproyecto.Datos;
+import com.mycompany.segundoproyecto.Funciones;
 import com.mycompany.segundoproyecto.funciones.Defensa;
+import com.mycompany.segundoproyecto.funciones.Personaje;
 import com.mycompany.segundoproyecto.funciones.Zombie;
 import java.util.ArrayList;
+import javax.swing.JButton;
 
 /**
  *
@@ -56,6 +59,8 @@ public class VentanaResultados extends javax.swing.JFrame {
         txa_resultadod = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         txa_resultadoz = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +78,20 @@ public class VentanaResultados extends javax.swing.JFrame {
         txa_resultadoz.setText("Resultados de los zombies:");
         jScrollPane4.setViewportView(txa_resultadoz);
 
+        jButton1.setText("Siguiente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Repetir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +102,11 @@ public class VentanaResultados extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,6 +117,11 @@ public class VentanaResultados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
@@ -102,6 +130,60 @@ public class VentanaResultados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Funciones.subirnivel();
+        
+        for (JButton[] jButtons : Datos.matrizBotonesInterfaz) {
+            for (JButton jButton : jButtons) {
+                jButton.setIcon(null);
+            }
+            
+        }
+        for (Personaje[] matrizPersonaje : Datos.matrizPersonajes) {
+            for (Personaje personaje : matrizPersonaje) {
+                personaje = null;
+                
+            }
+        }
+        int contado = 0;
+        for (JButton botonesdefensasDisponible : Datos.botonesdefensasDisponibles) {
+            if (Datos.defensas.get(contado).getNivelAparicion() <= Datos.nivel){
+                botonesdefensasDisponible.setEnabled(true);
+            }
+            contado += 1;
+            
+            
+        }
+        Datos.defensasEnJuego.clear();
+        Datos.ZombiesEnJuego.clear();
+        Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
+        Datos.campos = 0;
+        Datos.jugando = false;
+        Datos.ponePilar(10, 10);
+             
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        for (JButton[] jButtons : Datos.matrizBotonesInterfaz) {
+            for (JButton jButton : jButtons) {
+                jButton.setIcon(null);
+            }
+            
+        }
+        for (Personaje[] matrizPersonaje : Datos.matrizPersonajes) {
+            for (Personaje personaje : matrizPersonaje) {
+                personaje = null;
+                
+            }
+        }
+        Datos.defensasEnJuego.clear();
+        Datos.ZombiesEnJuego.clear();
+        Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
+        Datos.campos = 0;
+        Datos.jugando = false;
+        Datos.ponePilar(10, 10);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +221,8 @@ public class VentanaResultados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2;
     public javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JScrollPane jScrollPane4;
     public javax.swing.JLabel lbl_resultado_zombies;

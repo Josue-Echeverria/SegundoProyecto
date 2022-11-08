@@ -60,7 +60,7 @@ public class Funciones {
             }else if (Datos.accionMouse == Datos.EstadoHaciendoMouse.CARGANDOPERSONAJE && Datos.matrizPersonajes[i][j] == null ){
                 String[] datosboton = Datos.personajeCargando.split("%");
                 int indice = Integer.parseInt(datosboton[1]);
-                if (Datos.campos+Datos.defensas.get(indice).getCamposTipoDeAtaque() <= 20){
+                if (Datos.campos+Datos.defensas.get(indice).getCamposTipoDeAtaque() <= Datos.maximo){
                     BufferedImage bufferedImage;
                     Datos.matrizBotonesInterfaz[i][j].setIcon(Datos.defensas.get(indice).getApariencia().get(0));
                     Defensa nueva = new Defensa(Datos.defensas.get(indice).getNombre(),Datos.defensas.get(indice).getVida(),Datos.defensas.get(indice).getDañoPorSegundo(),Datos.defensas.get(indice).getNivelAparicion(),Datos.defensas.get(indice).getAlcance(),Datos.defensas.get(indice).getApariencia(),Datos.defensas.get(indice).getTipoDeAtaque());
@@ -71,7 +71,7 @@ public class Funciones {
                     Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
                     Datos.personajeCargando = null;
                     Datos.campos+=Datos.defensas.get(indice).getCamposTipoDeAtaque();
-                    Datos.label_campos_disponibles.setText("Espacio disponible: "+Datos.campos + "/20"); 
+                    Datos.label_campos_disponibles.setText("Espacio disponible: "+Datos.campos + "/"+ Integer.toString(Datos.maximo)); 
                 }
             }
         }else if (Datos.accionMouse == Datos.EstadoHaciendoMouse.NADA){
@@ -104,7 +104,7 @@ public class Funciones {
                 menor = zomby.getCampos();
             }
         }
-        int copiacampos = Datos.campos;
+        int copiacampos = Datos.maximo;
         while(copiacampos > 0){
             Random r = new Random();
             int valorDado = r.nextInt(Datos.zombies.size());

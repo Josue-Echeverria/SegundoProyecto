@@ -28,15 +28,20 @@ public class ThreadInformacion extends Thread {
     @Override
     public void run(){
         while (isRunning){
-            Personaje personajeConsulta = Datos.matrizPersonajes[i][j];
-            ventana.getLbl_TipoAtaqueDato().setText(personajeConsulta.getTipoDeAtaqueString());
-            ventana.getLbl_vidaDato().setText(Integer.toString(personajeConsulta.getVida()));
+            if ( Datos.matrizPersonajes[i][j] != null){
+                Personaje personajeConsulta = Datos.matrizPersonajes[i][j];
+                ventana.getLbl_TipoAtaqueDato().setText(personajeConsulta.getTipoDeAtaqueString());
+                ventana.getLbl_vidaDato().setText(Integer.toString(personajeConsulta.getVida()));
+
+                ventana.getLbl_dañoDato().setText(Integer.toString(personajeConsulta.getDañoPorSegundo()));
+
+                ventana.getLbl_nombreDato().setText(personajeConsulta.getNombre());
+
+                ventana.getLbl_nvlAparicionDato().setText(Integer.toString(personajeConsulta.getNivelAparicion()));
+            }else{
+                break;
+            }
             
-            ventana.getLbl_dañoDato().setText(Integer.toString(personajeConsulta.getDañoPorSegundo()));
-            
-            ventana.getLbl_nombreDato().setText(personajeConsulta.getNombre());
-            
-            ventana.getLbl_nvlAparicionDato().setText(Integer.toString(personajeConsulta.getNivelAparicion()));
             
             
         }

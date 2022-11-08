@@ -46,13 +46,14 @@ public class Datos {
     static public boolean jugando;
     static public ArrayList<ThreadCaminar> ThreadZombies;
     static public ArrayList<ThreadVolar> ThreadVoladores;
+     static public  ArrayList<JButton> botonesdefensasDisponibles;
     
     static public javax.swing.JLabel labelResultado;
     static public javax.swing.JLabel label_campos_disponibles;
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-
+    static public int maximo;
     //static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
     //static public String Muerto = "C:\\Users\\Jecheverria\\Personajes\\DeadZombie.PNG";//Modificar 
     static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
@@ -73,10 +74,12 @@ public class Datos {
         matrizPersonajes = new Personaje[27][27];
         matrizBotonesApareceZombies = new JButton[104];
         defensasDisponibles = new ArrayList<>();
+        botonesdefensasDisponibles = new ArrayList<>();
         defensasEnJuego = new ArrayList<>();
         ZombiesEnJuego = new ArrayList<>();
         ThreadZombies = new ArrayList<>(); 
         ThreadVoladores = new ArrayList<>(); 
+        maximo = 20;
         try {
             personajes =  new Modelo().read_personajes();
             zombies =  new Modelo().read_Zombies();
@@ -86,6 +89,10 @@ public class Datos {
            System.out.println("Error");
          Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public Datos(int cont){
+        
+        
     }
     public static void ponePilar(int j,int i){
          //***********************
