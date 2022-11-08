@@ -25,9 +25,10 @@ import javax.swing.ImageIcon;
 public class SegundoProyecto {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+       // System.out.println("Hello World!");
 //        new Principal().setVisible(true);
-        new VentanaJuego().setVisible(true);
+        //new VentanaJuego().setVisible(true);
 //        try {
 //            ArrayList<Zombie> hermano = new Modelo().read_Zombies();
 //            System.out.println(hermano.get(0).getNombre());

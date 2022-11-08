@@ -150,5 +150,27 @@ public class Funciones {
             }
         }
     }
+
+    static public void subirnivel(){
+        Datos.nivel += 1;
+        for (Defensa defensa : Datos.defensas) {
+            
+        
+            Random r = new Random();
+            double valorDado = r.nextInt(15)+5;
+            double porcentaje = valorDado/100;
+            
+            defensa.incremetaestadisticas(porcentaje);
+            
+        }
+        for (Zombie zombie : Datos.zombies) {
+            Random r = new Random();
+            double valorDado = r.nextInt(15)+5;
+            double porcentaje = valorDado/100;
+           
+            zombie.incremetaestadisticas(porcentaje);
+        }
+        
+    }
 }
 
