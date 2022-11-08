@@ -52,15 +52,13 @@ public class Datos {
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-<<<<<<< HEAD
+
     static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
     static public String Muerto = "C:\\Users\\Jecheverria\\Personajes\\DeadZombie.PNG";//Modificar 
     //static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
     //static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\DeadZombie.PNG";//Modificar 
-=======
-    //static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
-    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
->>>>>>> master
+
+
     static public Defensa Pilar;
     static public int[] coordsPilar;
     static public int campos;
