@@ -93,7 +93,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbPerdiste" pref="237" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
@@ -101,15 +100,6 @@
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
-=======
-                  <Component id="lbPerdiste" pref="237" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btJugar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
->>>>>>> master
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,14 +107,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <Component id="lbl_campos_disponibles" min="-2" max="-2" attributes="0"/>
-=======
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btJugar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
->>>>>>> master
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="lbPerdiste" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
@@ -142,14 +125,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_campos_disponibles">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="btJugar">
@@ -162,7 +137,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_disponibles">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Espacio disponible: "/>
+        <Property name="text" type="java.lang.String" value="EspacioDisponible: "/>
       </Properties>
     </Component>
   </SubComponents>
