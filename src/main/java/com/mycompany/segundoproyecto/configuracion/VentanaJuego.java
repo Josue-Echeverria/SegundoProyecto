@@ -175,6 +175,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         pnlDisponibles = new javax.swing.JPanel();
         lbPerdiste = new javax.swing.JLabel();
         btJugar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -204,6 +205,13 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDisponiblesLayout = new javax.swing.GroupLayout(pnlDisponibles);
         pnlDisponibles.setLayout(pnlDisponiblesLayout);
         pnlDisponiblesLayout.setHorizontalGroup(
@@ -212,7 +220,8 @@ public class VentanaJuego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbPerdiste, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btJugar)
                 .addContainerGap())
         );
@@ -220,7 +229,9 @@ public class VentanaJuego extends javax.swing.JFrame {
             pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btJugar)
+                .addGroup(pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btJugar)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(125, 125, 125))
@@ -248,6 +259,10 @@ public class VentanaJuego extends javax.swing.JFrame {
     private void btJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btJugarActionPerformed
        Funciones.generaJuego();
     }//GEN-LAST:event_btJugarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Funciones.subirnivel();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +301,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btJugar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lbPerdiste;
     private javax.swing.JPanel pnlDisponibles;
     private javax.swing.JPanel pnlFondo;

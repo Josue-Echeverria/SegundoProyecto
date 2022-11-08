@@ -48,8 +48,8 @@ public class Datos {
     static public ArrayList<Zombie> zombies;
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
-    static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
-    //static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+    //static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
+    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
     static public Defensa Pilar;
     static public int[] coordsPilar;
     static public int campos;

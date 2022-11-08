@@ -199,5 +199,12 @@ public class Personaje {
     public void setPosicion(int[] posicion) {
         this.posicion = posicion;
     }
-    
+    public void incremetaestadisticas(double porcentaje){
+        
+        this.Vida += Vida*porcentaje;
+        this.DañoPorSegundo += DañoPorSegundo*porcentaje;
+        this.Alcance += Alcance*porcentaje;
+        
+
+    }
 }
