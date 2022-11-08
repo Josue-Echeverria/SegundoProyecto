@@ -65,11 +65,12 @@ public class VentanaJuego extends javax.swing.JFrame {
         int largo = Datos.defensas.size();
         for (int i = 0;i< largo;i++) {
             JButton boton = new javax.swing.JButton();
-            boton.setSize(tamañobotones,tamañobotones);
+            
             boton.setLocation(contadorColumna*tamañobotones, contadorfila*tamañobotones);
 
 
             boton.setText(Datos.defensas.get(i).getApariencia()+ "%"+i);
+            
 
             ImageIcon apariencia1 = Datos.defensas.get(i).getApariencia().get(0);
 
@@ -82,7 +83,8 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
 
             boton.addActionListener(al2);
-            
+            boton.resize(tamañobotones, tamañobotones);
+            boton.setSize(tamañobotones,tamañobotones);
             pnlDisponibles.add(boton);
             
             if(contadorColumna == 4 ){
