@@ -178,6 +178,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         lbl_campos_disponibles = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         btJugar = new javax.swing.JButton();
         lbl_disponibles = new javax.swing.JLabel();
 
@@ -202,17 +203,24 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         lbPerdiste.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Cargar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("Usuario");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -229,9 +237,12 @@ public class VentanaJuego extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1)
+                    .addGroup(pnlDisponiblesLayout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addGap(43, 43, 43))
         );
         pnlDisponiblesLayout.setVerticalGroup(
@@ -239,9 +250,11 @@ public class VentanaJuego extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDisponiblesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_campos_disponibles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 558, Short.MAX_VALUE)
                 .addComponent(lbPerdiste, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(32, 32, 32)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(pnlDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -297,7 +310,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         
         
-        FileManager.writeObject(new DatosGuardar(1), "Guardado.dat");
+        FileManager.writeObject(new DatosGuardar(1), jTextField1.getText()+".dat");
         
         //FileManager.writeObject(guardar,"Guardado.dat");
         
@@ -308,89 +321,96 @@ public class VentanaJuego extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         
-        DatosGuardar p = (DatosGuardar) FileManager.readObject("Guardado.dat");
+        DatosGuardar p = (DatosGuardar) FileManager.readObject(jTextField1.getText()+".dat");
         System.out.println("Cargando");
         
         System.out.println(p);
-        for (JButton[] jButtons : Datos.matrizBotonesInterfaz) {
-            for (JButton jButton : jButtons) {
-                if(jButton != null){
-                    jButton.setVisible(false);
-                    
+        if (p != null){
+            for (JButton[] jButtons : Datos.matrizBotonesInterfaz) {
+                for (JButton jButton : jButtons) {
+                    if(jButton != null){
+                        jButton.setVisible(false);
+
+                    }
+                    /*else{
+                        System.out.println("none");
+                    }*/
+
                 }
-                /*else{
-                    System.out.println("none");
-                }*/
-                
+
             }
-            
-        }
         
-        Datos.matrizBotonesInterfaz = p.matrizBotonesInterfaz;
+            Datos.matrizBotonesInterfaz = p.matrizBotonesInterfaz;
         
-        for (JButton[] jButtons : p.matrizBotonesInterfaz) {
-            for (JButton jButton : jButtons) {
-                if(jButton != null){
-                    jButton.addActionListener(al);
-                    pnlFondo.add(jButton);
-                    
+            for (JButton[] jButtons : p.matrizBotonesInterfaz) {
+                for (JButton jButton : jButtons) {
+                    if(jButton != null){
+                        jButton.addActionListener(al);
+                        pnlFondo.add(jButton);
+
+                    }
+                    /*else{
+                        System.out.println("none");
+                    }*/
+
                 }
-                /*else{
-                    System.out.println("none");
-                }*/
-                
+
             }
-            
+
+
+            Datos.matrizPersonajes = p.matrizPersonajes ;
+            Datos.matrizBotonesApareceZombies = p.matrizBotonesApareceZombies ;
+            Datos.personajes = p.personajes ;
+            Datos.defensas = p.defensas ;
+            Datos.defensasDisponibles = p.defensasDisponibles ;
+            Datos.defensasEnJuego = p.defensasEnJuego ;
+            Datos.ZombiesEnJuego = p.ZombiesEnJuego ;
+            Datos.jugando = p.jugando ;
+            Datos.ThreadZombies = p.ThreadZombies ;
+            for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
+                ThreadZomby.start();
+
+            }
+
+            Datos.ThreadVoladores = p.ThreadVoladores ;
+            for (ThreadVolar ThreadZomby : Datos.ThreadVoladores) {
+                ThreadZomby.start();
+
+            }
+
+            for (JButton botonesdefensasDisponible : Datos.botonesdefensasDisponibles) {
+                botonesdefensasDisponible.setVisible(false);
+
+            }
+            Datos.botonesdefensasDisponibles = p.botonesdefensasDisponibles ;
+            creaMatrixPersonaje();
+
+
+
+
+
+
+            Datos.zombies = p.zombies ;
+
+            Datos.personajeCargando = p.personajeCargando ;
+            Datos.maximo = p.maximo ;
+
+            Datos.ruta = p.ruta ;
+            Datos.Muerto = p.Muerto ;
+            Datos.Pilar = p.Pilar ;
+            Datos.coordsPilar = p.coordsPilar ;
+            Datos.campos = p.campos ;
+            Datos.nivel = p.nivel ;
+            Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
+            Datos.label_campos_disponibles.setText("Espacio disponible: "+Datos.campos + "/"+ Integer.toString(Datos.maximo));
+            Datos.labelResultado.setText("");
         }
         
-        
-        Datos.matrizPersonajes = p.matrizPersonajes ;
-        Datos.matrizBotonesApareceZombies = p.matrizBotonesApareceZombies ;
-        Datos.personajes = p.personajes ;
-        Datos.defensas = p.defensas ;
-        Datos.defensasDisponibles = p.defensasDisponibles ;
-        Datos.defensasEnJuego = p.defensasEnJuego ;
-        Datos.ZombiesEnJuego = p.ZombiesEnJuego ;
-        Datos.jugando = p.jugando ;
-        Datos.ThreadZombies = p.ThreadZombies ;
-        for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
-            ThreadZomby.start();
-            
-        }
-        
-        Datos.ThreadVoladores = p.ThreadVoladores ;
-        for (ThreadVolar ThreadZomby : Datos.ThreadVoladores) {
-            ThreadZomby.start();
-            
-        }
-        
-        for (JButton botonesdefensasDisponible : Datos.botonesdefensasDisponibles) {
-            botonesdefensasDisponible.setVisible(false);
-            
-        }
-        Datos.botonesdefensasDisponibles = p.botonesdefensasDisponibles ;
-        creaMatrixPersonaje();
-        
-        
-        
-        
-        
-       
-        Datos.zombies = p.zombies ;
-        
-        Datos.personajeCargando = p.personajeCargando ;
-        Datos.maximo = p.maximo ;
-        
-        Datos.ruta = p.ruta ;
-        Datos.Muerto = p.Muerto ;
-        Datos.Pilar = p.Pilar ;
-        Datos.coordsPilar = p.coordsPilar ;
-        Datos.campos = p.campos ;
-        Datos.nivel = p.nivel ;
-        Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
-        Datos.label_campos_disponibles.setText("Espacio disponible: "+Datos.campos + "/"+ Integer.toString(Datos.maximo));
-        Datos.labelResultado.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,6 +451,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     private javax.swing.JButton btJugar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbPerdiste;
     private javax.swing.JLabel lbl_campos_disponibles;
     private javax.swing.JLabel lbl_disponibles;
