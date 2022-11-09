@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,7 @@ import javax.swing.JButton;
     x,
     y;
 }
-public class ThreadCaminar extends Thread {
+public class ThreadCaminar extends Thread implements Serializable {
     private boolean isRunning = true;
     private boolean isPaused = false;
     ImageIcon imagen;

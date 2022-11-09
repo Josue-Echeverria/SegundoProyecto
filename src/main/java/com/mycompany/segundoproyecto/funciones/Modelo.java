@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,7 +20,7 @@ import javax.swing.ImageIcon;
  *
  * @author jecheverria
  */
-public class Modelo {
+public class Modelo implements Serializable {
     
 
  public ArrayList<Personaje> read_personajes() throws FileNotFoundException, IOException{

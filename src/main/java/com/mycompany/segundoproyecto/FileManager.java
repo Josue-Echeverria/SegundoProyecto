@@ -91,7 +91,9 @@ public class FileManager {
               output.close();
             }
           }  
-          catch(IOException ex){}
+          catch(IOException ex){
+             System.out.println(ex.getMessage());
+          }
         
     }
     
@@ -112,9 +114,10 @@ public class FileManager {
             }
           }
           catch(ClassNotFoundException ex){
-           
+              System.out.println(ex.getMessage());
           }
           catch(IOException ex){
+              System.out.println(ex.getMessage());
             
           }
         return null;

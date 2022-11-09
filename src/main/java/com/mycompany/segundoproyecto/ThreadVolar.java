@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ import javax.swing.ImageIcon;
  *
  * @author jecheverria
  */
-public class ThreadVolar extends Thread {
+public class ThreadVolar extends Thread implements Serializable {
         private boolean isRunning = true;
     private boolean isPaused = false;
     ImageIcon imagen;

@@ -27,6 +27,7 @@ import com.mycompany.segundoproyecto.funciones.Modelo;
 import com.mycompany.segundoproyecto.funciones.Personaje;
 import com.mycompany.segundoproyecto.funciones.Zombie;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,7 @@ import javax.swing.JButton;
  *
  * @author PC
  */
-public class DatosGuardar {
+public class DatosGuardar implements Serializable{
     static public enum EstadoHaciendoMouse{
     CARGANDOPERSONAJE,
     MOVIENDOPILAR,
@@ -54,7 +55,7 @@ public class DatosGuardar {
     public boolean jugando;
     public ArrayList<ThreadCaminar> ThreadZombies;
     public ArrayList<ThreadVolar> ThreadVoladores;
-    public  ArrayList<JButton> botonesdefensasDisponibles;
+    public ArrayList<JButton> botonesdefensasDisponibles;
     
     public javax.swing.JLabel labelResultado;
     public javax.swing.JLabel label_campos_disponibles;
@@ -100,7 +101,31 @@ public class DatosGuardar {
         }
     }
     public DatosGuardar(int cont){
+        this.matrizBotonesInterfaz = Datos.matrizBotonesInterfaz;
+        this.matrizPersonajes = Datos.matrizPersonajes ;
+        this.matrizBotonesApareceZombies = Datos.matrizBotonesApareceZombies ;
+        this.personajes = Datos.personajes ;
+        this.defensas = Datos.defensas ;
+        this.defensasDisponibles = Datos.defensasDisponibles ;
+        this.defensasEnJuego = Datos.defensasEnJuego ;
+        this.ZombiesEnJuego = Datos.ZombiesEnJuego ;
+        this.jugando = Datos.jugando ;
+        this.ThreadZombies = Datos.ThreadZombies ;
+        this.ThreadVoladores = Datos.ThreadVoladores ;
+        this.botonesdefensasDisponibles = Datos.botonesdefensasDisponibles ;
+        this.labelResultado = Datos.labelResultado ;
+        this.label_campos_disponibles = Datos.label_campos_disponibles ;
+        this.zombies = Datos.zombies ;
         
+        this.personajeCargando = Datos.personajeCargando ;
+        this.maximo = Datos.maximo ;
+        
+        this.ruta = Datos.ruta ;
+        this.Muerto = Datos.Muerto ;
+        this.Pilar = Datos.Pilar ;
+        this.coordsPilar = Datos.coordsPilar ;
+        this.campos = Datos.campos ;
+        this.nivel = Datos.nivel ;
         
     }
     

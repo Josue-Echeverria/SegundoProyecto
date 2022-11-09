@@ -46,7 +46,7 @@ public class Datos {
     static public boolean jugando;
     static public ArrayList<ThreadCaminar> ThreadZombies;
     static public ArrayList<ThreadVolar> ThreadVoladores;
-     static public  ArrayList<JButton> botonesdefensasDisponibles;
+    static public  ArrayList<JButton> botonesdefensasDisponibles;
     
     static public javax.swing.JLabel labelResultado;
     static public javax.swing.JLabel label_campos_disponibles;

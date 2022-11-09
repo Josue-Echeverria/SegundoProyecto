@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 
@@ -68,7 +69,7 @@ enum Tipo{
 
 }
 
-public class Personaje {
+public class Personaje implements Serializable{
     public static Tipo tipoPilar = Tipo.CONTACTO;
     private int Vida;
     private int VidaOriginal;

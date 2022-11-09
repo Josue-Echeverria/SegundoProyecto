@@ -10,6 +10,7 @@ import com.mycompany.segundoproyecto.DatosGuardar;
 import com.mycompany.segundoproyecto.FileManager;
 import com.mycompany.segundoproyecto.Funciones;
 import com.mycompany.segundoproyecto.ThreadCaminar;
+import com.mycompany.segundoproyecto.ThreadVolar;
 import com.mycompany.segundoproyecto.funciones.Defensa;
 import com.mycompany.segundoproyecto.funciones.Personaje;
 import com.mycompany.segundoproyecto.funciones.Zombie;
@@ -26,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -132,6 +134,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("holaaaaaaaaaaaa");
             if(!Datos.jugando){
                 JButton boton = (JButton) e.getSource();
                 Datos.accionMouse = Datos.EstadoHaciendoMouse.CARGANDOPERSONAJE;
@@ -147,6 +150,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            
             
             for (int i = 0; i < 27; i++) {
                 for (int j = 0; j < 27; j++) {                    
@@ -290,19 +294,28 @@ public class VentanaJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btJugarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Datos guardar = new Datos(1);
-        FileManager.writeObject(guardar,"Guardado");
+        
+        
+        
+        FileManager.writeObject(new DatosGuardar(1), "Guardado.dat");
+        
+        //FileManager.writeObject(guardar,"Guardado.dat");
+        
+        
+         System.out.println("Guardado");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        
         DatosGuardar p = (DatosGuardar) FileManager.readObject("Guardado.dat");
         System.out.println("Cargando");
-        for (JButton[] jButtons : p.matrizBotonesInterfaz) {
+        
+        System.out.println(p);
+        for (JButton[] jButtons : Datos.matrizBotonesInterfaz) {
             for (JButton jButton : jButtons) {
                 if(jButton != null){
-                    if (jButton.getIcon() != null){
-                        System.out.println(jButton.getIcon().toString());
-                    }
+                    jButton.setVisible(false);
                     
                 }
                 /*else{
@@ -312,7 +325,25 @@ public class VentanaJuego extends javax.swing.JFrame {
             }
             
         }
-        /*Datos.matrizBotonesInterfaz = p.matrizBotonesInterfaz;
+        
+        Datos.matrizBotonesInterfaz = p.matrizBotonesInterfaz;
+        
+        for (JButton[] jButtons : p.matrizBotonesInterfaz) {
+            for (JButton jButton : jButtons) {
+                if(jButton != null){
+                    jButton.addActionListener(al);
+                    pnlFondo.add(jButton);
+                    
+                }
+                /*else{
+                    System.out.println("none");
+                }*/
+                
+            }
+            
+        }
+        
+        
         Datos.matrizPersonajes = p.matrizPersonajes ;
         Datos.matrizBotonesApareceZombies = p.matrizBotonesApareceZombies ;
         Datos.personajes = p.personajes ;
@@ -322,12 +353,31 @@ public class VentanaJuego extends javax.swing.JFrame {
         Datos.ZombiesEnJuego = p.ZombiesEnJuego ;
         Datos.jugando = p.jugando ;
         Datos.ThreadZombies = p.ThreadZombies ;
+        for (ThreadCaminar ThreadZomby : Datos.ThreadZombies) {
+            ThreadZomby.start();
+            
+        }
+        
         Datos.ThreadVoladores = p.ThreadVoladores ;
+        for (ThreadVolar ThreadZomby : Datos.ThreadVoladores) {
+            ThreadZomby.start();
+            
+        }
+        
+        for (JButton botonesdefensasDisponible : Datos.botonesdefensasDisponibles) {
+            botonesdefensasDisponible.setVisible(false);
+            
+        }
         Datos.botonesdefensasDisponibles = p.botonesdefensasDisponibles ;
-        Datos.labelResultado = p.labelResultado ;
-        Datos.label_campos_disponibles = p.label_campos_disponibles ;
+        creaMatrixPersonaje();
+        
+        
+        
+        
+        
+       
         Datos.zombies = p.zombies ;
-        Datos.accionMouse = p.accionMouse ;
+        
         Datos.personajeCargando = p.personajeCargando ;
         Datos.maximo = p.maximo ;
         
@@ -336,7 +386,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         Datos.Pilar = p.Pilar ;
         Datos.coordsPilar = p.coordsPilar ;
         Datos.campos = p.campos ;
-        Datos.nivel = p.nivel ;*/
+        Datos.nivel = p.nivel ;
+        Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
+        Datos.label_campos_disponibles.setText("Espacio disponible: "+Datos.campos + "/"+ Integer.toString(Datos.maximo));
+        Datos.labelResultado.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

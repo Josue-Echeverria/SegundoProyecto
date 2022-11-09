@@ -7,12 +7,13 @@ package com.mycompany.segundoproyecto;
 import com.mycompany.segundoproyecto.configuracion.VentanaJuego;
 import com.mycompany.segundoproyecto.configuracion.VentanaInformacion;
 import com.mycompany.segundoproyecto.funciones.Personaje;
+import java.io.Serializable;
 
 /**
  *
  * @author PC
  */
-public class ThreadInformacion extends Thread {
+public class ThreadInformacion extends Thread implements Serializable {
     private boolean isRunning = true;
     int i;
     int j;

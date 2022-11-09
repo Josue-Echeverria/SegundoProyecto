@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,13 +29,14 @@ import javax.swing.JButton;
  *
  * @author deyla
  */
-public class Funciones {
+public class Funciones implements Serializable {
     
     
     
-    static public void FuncionBotones(int i,int j){
-        
+    static public void FuncionBotones(int i,int j) {
+        System.out.println("holaaaaaaaaaaaa");
         if(!Datos.jugando){
+            System.out.println("holaaaaaaaaaaaa2");
             System.out.println(j);
             System.out.println(i);  
             if (Datos.accionMouse == Datos.EstadoHaciendoMouse.MOVIENDOPILAR){
