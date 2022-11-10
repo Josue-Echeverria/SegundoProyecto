@@ -41,13 +41,7 @@ public class ThreadInformacion extends Thread implements Serializable {
                 ventana.getLbl_nvlAparicionDato().setText(Integer.toString(personajeConsulta.getNivelAparicion()));
             }else{
                 break;
-            }
-            
-            
-            
+            } 
         }
     }
-        
-        
-    
 }

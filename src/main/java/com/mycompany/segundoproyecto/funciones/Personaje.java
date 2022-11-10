@@ -136,6 +136,10 @@ public class Personaje implements Serializable{
         return getTipoDeAtaque() == Tipo.AEREO;
     }
     
+    public boolean EsAtaqueMultiple(){
+        return getTipoDeAtaque() == Tipo.ATAQUEMULTIPLE;
+    }
+    
     public boolean EsImpacto(){
         return getTipoDeAtaque() == Tipo.IMPACTO;
     }

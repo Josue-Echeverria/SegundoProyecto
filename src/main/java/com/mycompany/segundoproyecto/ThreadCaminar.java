@@ -174,6 +174,8 @@ public void run(){
                                 break;
                             }
                             if(personaje.getVida() <= 0){
+                                
+                            Datos.ZombiesEnJuego.remove(personaje);
                                 break;
                             }
                         }else{//Es impacto
@@ -210,6 +212,7 @@ public void run(){
                 } catch (InterruptedException ex) {
                 }
             }
+            
             if (Datos.ZombiesEnJuego.contains(Datos.matrizPersonajes[jinicio][iinicio])){
                 jinicio = coordsanterior[0];
                 iinicio = coordsanterior[1];
@@ -221,6 +224,9 @@ public void run(){
             }
         }
         BufferedImage bufferedImage;
+        if (Datos.ZombiesEnJuego.isEmpty()){
+            new VentanaResultados().setVisible(true);
+        }
         try {
             bufferedImage = ImageIO.read(new File(Datos.Muerto));
             Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);

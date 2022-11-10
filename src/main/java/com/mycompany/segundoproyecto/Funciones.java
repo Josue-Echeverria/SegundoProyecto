@@ -69,6 +69,7 @@ public class Funciones implements Serializable {
                     int[] pos0 = {i,j};
                     nueva.setPosicion(pos0);
                     Datos.defensasEnJuego.add(nueva);
+                    Datos.DefensasCreadas.add(nueva);
                     Datos.matrizPersonajes[i][j] = nueva;
                     Datos.accionMouse = Datos.EstadoHaciendoMouse.NADA;
                     Datos.personajeCargando = null;
@@ -127,6 +128,7 @@ public class Funciones implements Serializable {
                 Zombie nuevo = new Zombie(Datos.zombies.get(valorDado).getNombre(),Datos.zombies.get(valorDado).getVida(),Datos.zombies.get(valorDado).getDañoPorSegundo(),Datos.zombies.get(valorDado).getNivelAparicion(),Datos.zombies.get(valorDado).getAlcance(),Datos.zombies.get(valorDado).getApariencia(),Datos.zombies.get(valorDado).getTipoDeAtaque());
                 
                 Datos.ZombiesEnJuego.add(nuevo);
+                Datos.ZombiesCreados.add(nuevo);
                 if(!nuevo.EsAereo()){
                     ThreadCaminar tr = new ThreadCaminar(nuevo, i,j );
                     tr.start();

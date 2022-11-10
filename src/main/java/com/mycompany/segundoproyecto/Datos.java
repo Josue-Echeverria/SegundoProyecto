@@ -43,6 +43,8 @@ public class Datos {
     static public ArrayList<Defensa> defensasDisponibles;
     static public ArrayList<Defensa> defensasEnJuego;
     static public ArrayList<Zombie> ZombiesEnJuego;
+    static public ArrayList<Defensa> DefensasCreadas;
+    static public ArrayList<Zombie> ZombiesCreados;
     static public boolean jugando;
     static public ArrayList<ThreadCaminar> ThreadZombies;
     static public ArrayList<ThreadVolar> ThreadVoladores;
@@ -54,10 +56,10 @@ public class Datos {
     static public EstadoHaciendoMouse accionMouse;
     static public String personajeCargando;
     static public int maximo;
-    //static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
-    //static public String Muerto = "C:\\Users\\Jecheverria\\Personajes\\DeadZombie.PNG";//Modificar 
-    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
-    static public String Muerto = "C:\\Users\\PC\\Pictures\\Personajes\\DeadZombie.PNG";//Modificar 
+    static public String ruta = "C:\\Users\\Jecheverria\\Personajes\\";//Modificar 
+    static public String Muerto = "C:\\Users\\Jecheverria\\Personajes\\DeadZombie.PNG";//Modificar 
+//    static public String ruta = "C:\\Users\\PC\\Pictures\\Personajes\\";//Modificar 
+//    static public String Muerto = "C:\\Users\\PC\\Pictures\\Personajes\\DeadZombie.PNG";//Modificar 
 
 
     static public Defensa Pilar;
@@ -77,8 +79,11 @@ public class Datos {
         botonesdefensasDisponibles = new ArrayList<>();
         defensasEnJuego = new ArrayList<>();
         ZombiesEnJuego = new ArrayList<>();
+        DefensasCreadas = new ArrayList<>();
+        ZombiesCreados = new ArrayList<>();
         ThreadZombies = new ArrayList<>(); 
         ThreadVoladores = new ArrayList<>(); 
+        
         maximo = 20;
         try {
             personajes =  new Modelo().read_personajes();

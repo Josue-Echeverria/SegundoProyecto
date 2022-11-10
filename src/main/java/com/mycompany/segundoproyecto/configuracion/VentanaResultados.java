@@ -25,7 +25,9 @@ public class VentanaResultados extends javax.swing.JFrame {
         initComponents();
         txa_resultadod.setEditable(false);
         txa_resultadoz.setEditable(false);
-        for(Zombie zombie : Datos.ZombiesEnJuego){
+        Datos.ThreadZombies.clear();
+        Datos.ThreadVoladores.clear();
+        for(Zombie zombie : Datos.ZombiesCreados){
             zombie.setRegistro("\n\nNombre: "+ zombie.getNombre()+"\nPosicion: "+ "("+zombie.getPosicion()[0]+","+zombie.getPosicion()[1]+")"
                     +"\nVida: "+zombie.getVida() + "/"+zombie.getVidaOriginal()+zombie.getRegistro());
             if (zombie.getVida()<= 0){
@@ -34,7 +36,7 @@ public class VentanaResultados extends javax.swing.JFrame {
             txa_resultadoz.setText(txa_resultadoz.getText()+zombie.getRegistro());
         }    
 
-        for(Defensa defensa : Datos.defensasEnJuego){
+        for(Defensa defensa : Datos.DefensasCreadas){
             defensa.setRegistro("\n\nNombre: "+ defensa.getNombre()+"\nPosicion: "+ "("+defensa.getPosicion()[0]+","+defensa.getPosicion()[1]+")"+
                     "\nVida: "+defensa.getVida() + "/"+defensa.getVidaOriginal()+defensa.getRegistro());
            
@@ -142,8 +144,12 @@ public class VentanaResultados extends javax.swing.JFrame {
         }
         for (Personaje[] matrizPersonaje : Datos.matrizPersonajes) {
             for (Personaje personaje : matrizPersonaje) {
-                personaje = null;
                 
+                if (personaje !=null){
+                personaje.tostring();}
+                personaje = null;
+                if (personaje ==null){
+                System.out.println("Meborree");}
             }
         }
         int contado = 0;

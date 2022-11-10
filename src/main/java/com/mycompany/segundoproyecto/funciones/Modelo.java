@@ -4,6 +4,7 @@
  */
 package com.mycompany.segundoproyecto.funciones;
 
+import com.mycompany.segundoproyecto.Datos;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -241,19 +242,38 @@ public ArrayList<Zombie> read_Zombies() throws FileNotFoundException, IOExceptio
                     double pitagoras = calcular_distancia(desplazamiento_horizontal, desplazamiento_vertical);
                     if(pitagoras <= Defensas.get(i).getAlcance()){//Si la defensa tien rango para pegarlo
                         if (!Defensas.get(i).EsImpacto()){
-                            zombie_actual.setVida(zombie_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
+                            if(!Defensas.get(i).EsAtaqueMultiple()){
+                                zombie_actual.setVida(zombie_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
 
-                            Defensas.get(i).setRegistro(Defensas.get(i).getRegistro()+ "\nAtacó a: "+ zombie_actual.getNombre() +
-                                    "\nRealizando "+Defensas.get(i).getDañoPorSegundo()+" de daño"+
-                                    "\nDejandolo a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+                                Defensas.get(i).setRegistro(Defensas.get(i).getRegistro()+ "\nAtacó a: "+ zombie_actual.getNombre() +
+                                        "\nRealizando "+Defensas.get(i).getDañoPorSegundo()+" de daño"+
+                                        "\nDejandolo a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
 
-                            zombie_actual.setRegistro(zombie_actual.getRegistro()+ "\nFue atacado por "+Defensas.get(i).getNombre()+
-                                    "\nLe bajo "+Defensas.get(i).getDañoPorSegundo()+" puntos de vida"+
-                                    "\nQuedando a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+                                zombie_actual.setRegistro(zombie_actual.getRegistro()+ "\nFue atacado por "+Defensas.get(i).getNombre()+
+                                        "\nLe bajo "+Defensas.get(i).getDañoPorSegundo()+" puntos de vida"+
+                                        "\nQuedando a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+                                if (zombie_actual.getVida()<=0){
+                                    Datos.ZombiesEnJuego.remove(zombie_actual);
+                                    break;
+                                }
+                            }
+                            else{
+                                zombie_actual.setVida(zombie_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
+                                zombie_actual.setVida(zombie_actual.getVida()-Defensas.get(i).getDañoPorSegundo());
 
+                                Defensas.get(i).setRegistro(Defensas.get(i).getRegistro()+ "\nAtacó a en 2 ocasiones a:"+ zombie_actual.getNombre() +
+                                        "\nRealizando "+Defensas.get(i).getDañoPorSegundo()+"*2 de daño"+
+                                        "\nDejandolo a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
 
-                            if (zombie_actual.getVida()<=0){
-                                break;
+                                zombie_actual.setRegistro(zombie_actual.getRegistro()+ "\nFue atacado en 2 ocasiones por "+Defensas.get(i).getNombre()+
+                                        "\nLe bajo "+Defensas.get(i).getDañoPorSegundo()+"*2 puntos de vida"+
+                                        "\nQuedando a "+zombie_actual.getVida() + "/"+zombie_actual.getVidaOriginal()+ " de vida");
+                                
+                                if (zombie_actual.getVida()<=0){
+                                    Datos.ZombiesEnJuego.remove(zombie_actual);
+                                    break;
+                                }
+                            
                             }
                         }else{
                             zombie_actual.setVida(0);
