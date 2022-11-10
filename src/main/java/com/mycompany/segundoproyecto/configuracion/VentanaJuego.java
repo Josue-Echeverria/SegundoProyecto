@@ -78,7 +78,7 @@ public class VentanaJuego extends javax.swing.JFrame {
             System.out.println(Datos.nivel);
             System.out.println(Datos.defensas.get(i).getNivelAparicion());
             if (Datos.defensas.get(i).getNivelAparicion()> Datos.nivel){
-                boton.setBackground(Color.red);
+                
                 boton.setEnabled(false);
             }
 
